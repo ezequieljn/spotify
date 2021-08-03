@@ -4,6 +4,7 @@ import AppBarSearch from '../../components/AppBar/Search'
 import { Grid } from '@material-ui/core'
 import useStyles from './styles'
 import ArtistDescription from '../../components/ArtistDescription'
+import Playlist from '../../components/Playlist'
 
 
 function SearchPage() {
@@ -13,6 +14,9 @@ function SearchPage() {
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <ArtistDescription />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                    <Playlist />
                 </Grid>
             </Grid>
         </Menu>

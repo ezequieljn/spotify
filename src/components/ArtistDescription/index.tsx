@@ -15,7 +15,7 @@ function ArtistDescription() {
                     className={classes.paperContainer}
                 />
             </Box>
-            <Box fontWeight>
+            <Box>
                 <Typography variant="h4">Michael Jackson</Typography>
             </Box>
             <Box className={classes.artistContainer}>
