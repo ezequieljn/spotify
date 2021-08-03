@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Divider } from '@material-ui/core';
+import { Box, Divider } from '@material-ui/core';
 
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 
 import { ListItemIcon } from './ListItemIcon';
@@ -52,11 +51,18 @@ const Menu: React.FC<Props> = ({ window, children, AppBar }) => {
                 drawer={drawer}
                 handleDrawerToggle={handleDrawerToggle} />
             <main className={classes.content}>
-                <AppBar />
+                {
+                    AppBar && (
+
+                        <Box className={classes.appBarContainer}>
+                            <AppBar />
+                        </Box>
+                    )
+                }
                 {children}
             </main>
         </div>
     )
 }
-
-export { Menu }
+export default Menu
+export { Menu, DrawerMenu, ListItemIcon }
