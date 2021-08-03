@@ -1,17 +1,73 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Menu } from '../../components/Menu'
 import AppBarSearch from '../../components/AppBar/Search'
-import { Grid } from '@material-ui/core'
-import useStyles from './styles'
+import { Grid, IconButton, InputBase, Input, Paper } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search';
 import ArtistDescription from '../../components/ArtistDescription'
 import Playlist from '../../components/Playlist'
 import Album from '../../components/Album'
+import { GetServerSideProps } from 'next'
+import useStyles from './styles'
 
 
 function SearchPage() {
+    const [searchAlbum, setSearchAlbum] = useState('')
     const classes = useStyles()
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => console.log(searchAlbum), 500);
+        return () => clearTimeout(timeoutId);
+    }, [searchAlbum]);
+
+
+    function AppBarSearchProps() {
+        return (
+            <Grid container className={classes.container}>
+                <Grid item>
+                </Grid>
+                <Grid item>
+                    <Paper component="form" className={classes.root}>
+                        <IconButton className={classes.iconButton} aria-label="menu">
+                            <SearchIcon className={classes.iconSearch} />
+                        </IconButton>
+                        <InputBase
+                            className={classes.input}
+                            placeholder="Artistas, músicas ou podcasts"
+                            inputProps={{ 'aria-label': 'search artist' }}
+                            onChange={(e) => setSearchAlbum(e.target.value)}
+                            value={searchAlbum}
+                        />
+                    </Paper>
+                </Grid>
+                <Grid item>
+                </Grid>
+            </Grid>
+        )
+    }
+
     return (
-        <Menu AppBar={AppBarSearch}>
+        <Menu >
+            <Grid container className={classes.container}>
+                <Grid item>
+                </Grid>
+                <Grid item>
+                    <Paper component="form" className={classes.root}>
+                        <IconButton className={classes.iconButton} aria-label="menu">
+                            <SearchIcon className={classes.iconSearch} />
+                        </IconButton>
+                        <InputBase
+                            className={classes.input}
+                            placeholder="Artistas, músicas ou podcasts"
+                            inputProps={{ 'aria-label': 'search artist' }}
+                            onChange={(e) => setSearchAlbum(e.target.value)}
+                            value={searchAlbum}
+                        />
+                    </Paper>
+                </Grid>
+                <Grid item>
+                </Grid>
+            </Grid>
+
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <ArtistDescription />
@@ -30,6 +86,22 @@ function SearchPage() {
         </Menu>
     )
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+
+
+    if (query.artist) {
+        console.log(query)
+    }
+
+
+    return {
+        props: {
+
+        }
+    }
+}
+
 
 
 

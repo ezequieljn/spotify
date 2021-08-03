@@ -11,8 +11,13 @@ import useStyles from './styles'
 import { Grid } from '@material-ui/core';
 
 
+interface AppBarSearchProps {
+    onChange: (arg: string) => void;
+    value: string;
+}
 
-function AppBarSearch() {
+
+function AppBarSearch({ onChange, value }: AppBarSearchProps) {
     const classes = useStyles()
 
     return (
@@ -28,6 +33,8 @@ function AppBarSearch() {
                         className={classes.input}
                         placeholder="Artistas, músicas ou podcasts"
                         inputProps={{ 'aria-label': 'search google maps' }}
+                        onChange={event => onChange(event.target.value)}
+                        value={value}
                     />
                 </Paper>
             </Grid>
