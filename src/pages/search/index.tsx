@@ -20,30 +20,7 @@ function SearchPage() {
     }, [searchAlbum]);
 
 
-    function AppBarSearchProps() {
-        return (
-            <Grid container className={classes.container}>
-                <Grid item>
-                </Grid>
-                <Grid item>
-                    <Paper component="form" className={classes.root}>
-                        <IconButton className={classes.iconButton} aria-label="menu">
-                            <SearchIcon className={classes.iconSearch} />
-                        </IconButton>
-                        <InputBase
-                            className={classes.input}
-                            placeholder="Artistas, músicas ou podcasts"
-                            inputProps={{ 'aria-label': 'search artist' }}
-                            onChange={(e) => setSearchAlbum(e.target.value)}
-                            value={searchAlbum}
-                        />
-                    </Paper>
-                </Grid>
-                <Grid item>
-                </Grid>
-            </Grid>
-        )
-    }
+
 
     return (
         <Menu >
