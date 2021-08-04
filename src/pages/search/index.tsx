@@ -9,6 +9,7 @@ import Album from '../../components/Album'
 import { GetServerSideProps } from 'next'
 import useStyles from './styles'
 import { api } from '../../services';
+import ArtistAll from '../../components/ArtistAll';
 
 
 interface playlistProps {
@@ -25,7 +26,13 @@ interface albumstProps {
     image: string;
 }
 
-function SearchPage({ data, songs, albums }) {
+
+interface artistAllProps {
+    artist: string;
+    image: string;
+
+}
+function SearchPage({ artists, songs, albums }) {
     const [searchAlbum, setSearchAlbum] = useState('')
 
 
@@ -34,6 +41,7 @@ function SearchPage({ data, songs, albums }) {
         name: '',
         photo: '',
     })
+    const [artistAll, setArtistAll] = useState<artistAllProps[]>([])
 
     const [playlist, setPlaylist] = useState<playlistProps[]>([])
 
@@ -42,8 +50,13 @@ function SearchPage({ data, songs, albums }) {
 
     useEffect(() => {
 
-        if (data.artistMain[0]) {
-            setArtist({ name: data.artistMain[0].artist, photo: data.artistMain[0].image })
+        if (artists) {
+            if (artists.artistMain[0]) {
+                setArtist({ name: artists.artistMain[0].artist, photo: artists.artistMain[0].image })
+            }
+            if (artists.artistAll) {
+                setArtistAll(artists.artistAll)
+            }
         }
 
         if (songs[0]) {
@@ -110,6 +123,17 @@ function SearchPage({ data, songs, albums }) {
                     <Grid container spacing={2}>
 
                         {
+                            artistAll.map(item => (
+                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+                                    <ArtistAll artist={item.artist} photo={item.image} />
+                                </Grid>
+                            ))
+                        }
+                    </Grid>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <Grid container spacing={2}>
+                        {
                             album.map(item => (
                                 <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
                                     <Album artist={item.artist} photo={item.image} album={item.name} />
@@ -126,7 +150,7 @@ function SearchPage({ data, songs, albums }) {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const { artist } = query
 
-    let data
+    let artists
     let songs
     let albums
 
@@ -135,7 +159,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         const { data: song } = await api.post("songs", { artist })
         const { data: { album } } = await api.post("albums", { artist })
 
-        data = response
+        artists = response
         albums = album
         songs = song
     }
@@ -143,7 +167,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
     return {
         props: {
-            data,
+            artists,
             songs,
             albums
         }
