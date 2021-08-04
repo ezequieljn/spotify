@@ -40,5 +40,5 @@ const makeStore = () => {
         return store
     }
 }
-
+export default createWrapper(makeStore)
 export const wrapper = createWrapper(makeStore)

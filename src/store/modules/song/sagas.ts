@@ -20,5 +20,5 @@ export function* songRequest({ payload }: ActionType<typeof actions.songSearchAp
 
 
 export const song = all([
-    takeLatest('@album/REQUEST_API', songRequest)
+    takeLatest('@song/REQUEST_API', songRequest)
 ])

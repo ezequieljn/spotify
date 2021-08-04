@@ -9,6 +9,7 @@ export function songSearchApi({ artist }: { artist: string }) {
 
 // Save the data
 export function songSearchSave(data: songProps[]) {
+    console.log("action song", data)
     return action('@song/SAVE', { data })
 }
 

@@ -26,5 +26,5 @@ export function* artistRequest({ payload }: ActionType<typeof actions.artistSear
 
 
 export const artist = all([
-    takeLatest('@album/REQUEST_API', artistRequest)
+    takeLatest('@artist/REQUEST_API', artistRequest)
 ])

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Menu } from '../../components/Menu'
-import { Grid, IconButton, InputBase, Input, Paper } from '@material-ui/core'
+import { Grid, IconButton, InputBase, Input, Paper, Box } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ArtistDescription from '../../components/ArtistDescription'
 import Playlist from '../../components/Playlist'
@@ -14,6 +14,9 @@ import { StoreState } from '../../store/createStore';
 import { albumSearchSave } from '../../store/modules/album/actions'
 import { artistSearchSave } from '../../store/modules/artist/actions'
 import { songSearchSave } from '../../store/modules/song/actions'
+
+import { artistAlbumSongSearchApi } from '../../store/modules/global/action'
+import { albumSearchRequestApi } from '../../store/modules/album/actions'
 
 interface playlistProps {
     id: string;
@@ -30,26 +33,28 @@ function SearchPage({ artists, songs, albums }) {
     const classes = useStyles()
     const dispatch = useDispatch()
 
-    dispatch(albumSearchSave(albums))
-    dispatch(artistSearchSave(artists))
-    dispatch(songSearchSave(songs))
+    useEffect(() => {
+        dispatch(albumSearchSave(albums))
+        dispatch(artistSearchSave(artists))
+        dispatch(songSearchSave(songs))
+    }, [])
 
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => console.log(searchAlbum), 500);
+        const timeoutId = setTimeout(() => dispatch(artistAlbumSongSearchApi(searchAlbum)), 500);
         return () => clearTimeout(timeoutId);
     }, [searchAlbum]);
 
     const { album, artist, song } = useSelector((state: StoreState) => state);
 
-
     return (
         <Menu >
-            <Grid container className={classes.container}>
-                <Grid item>
+            <Grid container className={classes.container} spacing={1}>
+                <Grid item md={2}>
+                    <p>oii</p>
                 </Grid>
-                <Grid item>
-                    <Paper component="form" className={classes.root}>
+                <Grid item md={6}>
+                    <Box component="form" className={classes.root}>
                         <IconButton className={classes.iconButton} aria-label="menu">
                             <SearchIcon className={classes.iconSearch} />
                         </IconButton>
@@ -60,9 +65,10 @@ function SearchPage({ artists, songs, albums }) {
                             onChange={(e) => setSearchAlbum(e.target.value)}
                             value={searchAlbum}
                         />
-                    </Paper>
-                </Grid>
-                <Grid item>
+                    </Box>
+                </Grid >
+                <Grid item md={4}>
+                    <p>oii i</p>
                 </Grid>
             </Grid>
 
