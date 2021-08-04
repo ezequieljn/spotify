@@ -2,21 +2,30 @@ import React from 'react'
 import { Box } from '@material-ui/core'
 import useStyles from './styles'
 import Image from 'next/image'
-function Album() {
+
+
+interface AlbumProps {
+    artist: string;
+    photo: string;
+    album: string;
+}
+
+
+function Album({ artist, photo, album }: AlbumProps) {
     const classes = useStyles()
     return (
         <Box className={classes.albumContainer}>
-            <Box p={2}>
+            <Box className={classes.containerImage}>
                 <Image
-                    src="https://i.scdn.co/image/ab67616100005174a2a0b9e3448c1e702de9dc90"
+                    src={photo}
                     height={400}
                     width={400}
                     className={classes.albumImage}
                 />
             </Box>
-            <Box p={2}>
-                <p>Michael</p>
-                <p>Michael Jackson</p>
+            <Box className={classes.containerDescription}>
+                <p>{album}</p>
+                <p>{artist}</p>
             </Box>
         </Box>
     )

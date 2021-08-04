@@ -3,24 +3,32 @@ import { Box, Typography } from '@material-ui/core'
 import useStyles from './styles'
 import Image from 'next/image'
 
-function Playlist() {
+interface PlaylistProps {
+    name: string;
+    photoAlbum: string;
+    artist: string;
+    minutes: string;
+
+}
+
+function Playlist({ name, photoAlbum, minutes, artist }: PlaylistProps) {
     const classes = useStyles()
     return (
         <Box display="flex" flexDirection="row" className={classes.image}>
             <Box display="flex" flexDirection="row" className={classes.imageMusic}>
                 <Image
-                    src="https://i.scdn.co/image/ab67616100005174a2a0b9e3448c1e702de9dc90"
+                    src={photoAlbum}
                     height={50}
                     width={50}
                     className={classes.albumImageContainer}
                 />
                 <Box className={classes.musicDescription}>
-                    <p>Billie Jean</p>
-                    <p>Michael Jackson</p>
+                    <p>{name}</p>
+                    <p>{artist}</p>
                 </Box>
             </Box>
             <Box justifyContent="center" alignItems="center" className={classes.time}>
-                <Typography variant="body2">4:30</Typography>
+                <Typography variant="body2">{minutes}</Typography>
             </Box>
         </Box>
     )

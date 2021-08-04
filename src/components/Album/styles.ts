@@ -10,8 +10,14 @@ export default makeStyles((theme: Theme) =>
                 background: '#282828'
             }
         },
+        containerImage: {
+            padding: theme.spacing(2),
+        },
         albumImage: {
             borderRadius: 5
+        },
+        containerDescription: {
+            padding: theme.spacing(2),
         }
     }),
 );

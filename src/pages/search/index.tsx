@@ -8,11 +8,55 @@ import Playlist from '../../components/Playlist'
 import Album from '../../components/Album'
 import { GetServerSideProps } from 'next'
 import useStyles from './styles'
+import { api } from '../../services';
 
 
-function SearchPage() {
+interface playlistProps {
+    id: string;
+    album_id: string;
+    name: string;
+    artist: string;
+    photoAlbum: string;
+    minutes: string;
+}
+interface albumstProps {
+    name: string;
+    artist: string;
+    image: string;
+}
+
+function SearchPage({ data, songs, albums }) {
     const [searchAlbum, setSearchAlbum] = useState('')
+
+
+    const [album, setAlbum] = useState<albumstProps[]>([])
+    const [artist, setArtist] = useState({
+        name: '',
+        photo: '',
+    })
+
+    const [playlist, setPlaylist] = useState<playlistProps[]>([])
+
     const classes = useStyles()
+
+
+    useEffect(() => {
+
+        if (data.artistMain[0]) {
+            setArtist({ name: data.artistMain[0].artist, photo: data.artistMain[0].image })
+        }
+
+        if (songs[0]) {
+            setPlaylist(songs)
+        }
+        if (albums[0]) {
+            console.log(albums)
+            setAlbum(albums)
+        }
+    }, []);
+
+
+
 
     useEffect(() => {
         const timeoutId = setTimeout(() => console.log(searchAlbum), 500);
@@ -47,16 +91,31 @@ function SearchPage() {
 
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    <ArtistDescription />
+                    {
+                        artist.name && <ArtistDescription name={artist.name} photo={artist.photo} />
+                    }
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    <Playlist />
+                    {
+                        playlist.map(item => <Playlist
+                            name={item.name}
+                            photoAlbum={item.photoAlbum}
+                            minutes={item.minutes}
+                            artist={item.artist}
+                        />)
+                    }
+
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Grid container >
-                        <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-                            <Album />
-                        </Grid>
+                    <Grid container spacing={2}>
+
+                        {
+                            album.map(item => (
+                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
+                                    <Album artist={item.artist} photo={item.image} album={item.name} />
+                                </Grid>
+                            ))
+                        }
                     </Grid>
                 </Grid>
             </Grid>
@@ -65,16 +124,28 @@ function SearchPage() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+    const { artist } = query
 
+    let data
+    let songs
+    let albums
 
     if (query.artist) {
-        console.log(query)
+        const { data: response } = await api.post("artist", { artist })
+        const { data: song } = await api.post("songs", { artist })
+        const { data: { album } } = await api.post("albums", { artist })
+
+        data = response
+        albums = album
+        songs = song
     }
 
 
     return {
         props: {
-
+            data,
+            songs,
+            albums
         }
     }
 }
