@@ -1,6 +1,7 @@
 import { all } from 'redux-saga/effects';
-import { albums } from './album/sagas';
+import { album } from './album/sagas';
+import { artist } from './artist/sagas';
 
 export default function* rootSaga(): any {
-    yield all([albums])
+    yield all([album, artist])
 }

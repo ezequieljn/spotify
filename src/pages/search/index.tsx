@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Menu } from '../../components/Menu'
-import AppBarSearch from '../../components/AppBar/Search'
 import { Grid, IconButton, InputBase, Input, Paper } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ArtistDescription from '../../components/ArtistDescription'
@@ -10,7 +9,10 @@ import { GetServerSideProps } from 'next'
 import useStyles from './styles'
 import { api } from '../../services';
 import ArtistAll from '../../components/ArtistAll';
-
+import { useDispatch, useSelector } from 'react-redux'
+import { albumSearchSave } from '../../store/modules/album/actions'
+import { artistSearchSave } from '../../store/modules/artist/actions'
+import { StoreState } from '../../store/createStore';
 
 interface playlistProps {
     id: string;
@@ -36,36 +38,23 @@ function SearchPage({ artists, songs, albums }) {
     const [searchAlbum, setSearchAlbum] = useState('')
 
 
-    const [album, setAlbum] = useState<albumstProps[]>([])
-    const [artist, setArtist] = useState({
-        name: '',
-        photo: '',
-    })
     const [artistAll, setArtistAll] = useState<artistAllProps[]>([])
 
     const [playlist, setPlaylist] = useState<playlistProps[]>([])
 
     const classes = useStyles()
 
+    const dispatch = useDispatch()
+
+    dispatch(albumSearchSave(albums))
+    dispatch(artistSearchSave(artists))
 
     useEffect(() => {
-
-        if (artists) {
-            if (artists.artistMain[0]) {
-                setArtist({ name: artists.artistMain[0].artist, photo: artists.artistMain[0].image })
-            }
-            if (artists.artistAll) {
-                setArtistAll(artists.artistAll)
-            }
-        }
 
         if (songs[0]) {
             setPlaylist(songs)
         }
-        if (albums[0]) {
-            console.log(albums)
-            setAlbum(albums)
-        }
+
     }, []);
 
 
@@ -76,7 +65,7 @@ function SearchPage({ artists, songs, albums }) {
         return () => clearTimeout(timeoutId);
     }, [searchAlbum]);
 
-
+    const { album, artist } = useSelector((state: StoreState) => state);
 
 
     return (
@@ -105,7 +94,12 @@ function SearchPage({ artists, songs, albums }) {
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     {
-                        artist.name && <ArtistDescription name={artist.name} photo={artist.photo} />
+                        artist.artistMain.map(item => (
+                            <ArtistDescription
+                                name={item.artist}
+                                photo={item.image}
+                            />
+                        ))
                     }
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -123,7 +117,7 @@ function SearchPage({ artists, songs, albums }) {
                     <Grid container spacing={2}>
 
                         {
-                            artistAll.map(item => (
+                            artist.artistAll.map(item => (
                                 <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
                                     <ArtistAll artist={item.artist} photo={item.image} />
                                 </Grid>
@@ -134,7 +128,7 @@ function SearchPage({ artists, songs, albums }) {
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Grid container spacing={2}>
                         {
-                            album.map(item => (
+                            album.data.map(item => (
                                 <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
                                     <Album artist={item.artist} photo={item.image} album={item.name} />
                                 </Grid>
@@ -150,27 +144,18 @@ function SearchPage({ artists, songs, albums }) {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const { artist } = query
 
-    let artists
-    let songs
-    let albums
-
     if (query.artist) {
-        const { data: response } = await api.post("artist", { artist })
-        const { data: song } = await api.post("songs", { artist })
-        const { data: { album } } = await api.post("albums", { artist })
+        const { data: artists } = await api.post("artist", { artist })
+        const { data: songs } = await api.post("songs", { artist })
+        const { data: albums } = await api.post("albums", { artist })
 
-        artists = response
-        albums = album
-        songs = song
+        return {
+            props: { artists, songs, albums }
+        }
     }
 
-
     return {
-        props: {
-            artists,
-            songs,
-            albums
-        }
+        props: { artists: [], songs: [], albums: [] }
     }
 }
 

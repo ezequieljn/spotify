@@ -8,7 +8,7 @@ const show = (req: NextApiRequest, res: NextApiResponse) => {
         artist = artist.toLowerCase()
         const album = albums.filter(item => item.artist.toLocaleLowerCase().includes(artist))
 
-        return res.status(200).json({ album })
+        return res.status(200).json(album)
     }
     return res.status(400).json({ message: "Erro na consulta" })
 

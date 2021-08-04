@@ -4,13 +4,14 @@ import * as actions from './actions'
 export type AlbumAction = ActionType<typeof actions>
 
 export interface AlbumState {
-    readonly data: responseProps[];
+    readonly data: AlbumProps[];
 }
 
 
-export interface responseProps {
-    id: string,
-    name: string,
-    artist: string,
-    created_at: string
+export interface AlbumProps {
+    id: string;
+    name: string;
+    artist: string;
+    created_at: string;
+    image: string
 }

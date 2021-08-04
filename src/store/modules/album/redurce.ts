@@ -8,8 +8,8 @@ const initialState: AlbumState = {
 export default function album(state = initialState, action: AlbumAction): AlbumState {
     return produce(state, draft => {
         switch (action.type) {
-            case '@album/REQUEST_SUCCESS':
-                draft.data = action.payload.data;
+            case '@album/SAVE':
+                draft.data = action.payload;
                 break
             default:
                 return state;
