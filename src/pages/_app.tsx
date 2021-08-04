@@ -5,8 +5,14 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { theme } from '../global/theme';
 import '../styles/globals.css'
+import { PersistGate } from 'redux-persist/integration/react';
+import { useStore } from 'react-redux';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+import { wrapper } from '../store';
+
+function MyApp({ Component, pageProps }: AppProps) {
+    const store: any = useStore();
+
 
     useEffect(() => {
         const jssStyles = document.querySelector('#jss-server-side');
@@ -21,10 +27,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 <title>Spotify</title>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Component {...pageProps} />
-            </ThemeProvider>
+            <PersistGate persistor={store._persist}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Component {...pageProps} />
+                </ThemeProvider>
+            </PersistGate>
         </React.Fragment>
     );
 }
+
+export default wrapper.withRedux(MyApp)
