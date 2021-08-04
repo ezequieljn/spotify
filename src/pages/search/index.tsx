@@ -10,9 +10,10 @@ import useStyles from './styles'
 import { api } from '../../services';
 import ArtistAll from '../../components/ArtistAll';
 import { useDispatch, useSelector } from 'react-redux'
+import { StoreState } from '../../store/createStore';
 import { albumSearchSave } from '../../store/modules/album/actions'
 import { artistSearchSave } from '../../store/modules/artist/actions'
-import { StoreState } from '../../store/createStore';
+import { songSearchSave } from '../../store/modules/song/actions'
 
 interface playlistProps {
     id: string;
@@ -22,42 +23,16 @@ interface playlistProps {
     photoAlbum: string;
     minutes: string;
 }
-interface albumstProps {
-    name: string;
-    artist: string;
-    image: string;
-}
 
-
-interface artistAllProps {
-    artist: string;
-    image: string;
-
-}
 function SearchPage({ artists, songs, albums }) {
     const [searchAlbum, setSearchAlbum] = useState('')
 
-
-    const [artistAll, setArtistAll] = useState<artistAllProps[]>([])
-
-    const [playlist, setPlaylist] = useState<playlistProps[]>([])
-
     const classes = useStyles()
-
     const dispatch = useDispatch()
 
     dispatch(albumSearchSave(albums))
     dispatch(artistSearchSave(artists))
-
-    useEffect(() => {
-
-        if (songs[0]) {
-            setPlaylist(songs)
-        }
-
-    }, []);
-
-
+    dispatch(songSearchSave(songs))
 
 
     useEffect(() => {
@@ -65,7 +40,7 @@ function SearchPage({ artists, songs, albums }) {
         return () => clearTimeout(timeoutId);
     }, [searchAlbum]);
 
-    const { album, artist } = useSelector((state: StoreState) => state);
+    const { album, artist, song } = useSelector((state: StoreState) => state);
 
 
     return (
@@ -94,8 +69,9 @@ function SearchPage({ artists, songs, albums }) {
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     {
-                        artist.artistMain.map(item => (
+                        artist.artistMain.map((item, index) => (
                             <ArtistDescription
+                                key={item.id}
                                 name={item.artist}
                                 photo={item.image}
                             />
@@ -104,7 +80,8 @@ function SearchPage({ artists, songs, albums }) {
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     {
-                        playlist.map(item => <Playlist
+                        song.data.map(item => <Playlist
+                            key={item.id}
                             name={item.name}
                             photoAlbum={item.photoAlbum}
                             minutes={item.minutes}
@@ -115,11 +92,13 @@ function SearchPage({ artists, songs, albums }) {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Grid container spacing={2}>
-
                         {
                             artist.artistAll.map(item => (
-                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-                                    <ArtistAll artist={item.artist} photo={item.image} />
+                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id}>
+                                    <ArtistAll
+                                        artist={item.artist}
+                                        photo={item.image}
+                                    />
                                 </Grid>
                             ))
                         }
@@ -129,8 +108,13 @@ function SearchPage({ artists, songs, albums }) {
                     <Grid container spacing={2}>
                         {
                             album.data.map(item => (
-                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-                                    <Album artist={item.artist} photo={item.image} album={item.name} />
+                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id} >
+                                    <Album
+
+                                        artist={item.artist}
+                                        photo={item.image}
+                                        album={item.name}
+                                    />
                                 </Grid>
                             ))
                         }
@@ -144,7 +128,7 @@ function SearchPage({ artists, songs, albums }) {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const { artist } = query
 
-    if (query.artist) {
+    if (artist) {
         const { data: artists } = await api.post("artist", { artist })
         const { data: songs } = await api.post("songs", { artist })
         const { data: albums } = await api.post("albums", { artist })
@@ -155,7 +139,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     }
 
     return {
-        props: { artists: [], songs: [], albums: [] }
+        props: {
+            artists: {
+                artistAll: [],
+                artistMain: []
+            },
+            songs: [], albums: []
+        }
     }
 }
 
