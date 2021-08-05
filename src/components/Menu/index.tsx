@@ -10,14 +10,15 @@ import useStyles from './styles'
 import InicioSvg from '../../assets/menu/inicio.svg'
 import BuscarSvg from '../../assets/menu/buscar.svg'
 import BibliotecaSvg from '../../assets/menu/biblioteca.svg'
+import AppBar from '@material-ui/core/AppBar';
 
 interface Props {
     window?: () => Window;
     children?: ReactNode;
-    AppBar?: React.FC;
+
 }
 
-const Menu: React.FC<Props> = ({ window, children, AppBar }) => {
+const Menu: React.FC<Props> = ({ window, children }) => {
     const classes = useStyles();
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -44,6 +45,7 @@ const Menu: React.FC<Props> = ({ window, children, AppBar }) => {
     const container = window !== undefined ? () => window().document.body : undefined;
 
     return (
+
         <div className={classes.root}>
             <DrawerMenu
                 container={container}
@@ -51,17 +53,11 @@ const Menu: React.FC<Props> = ({ window, children, AppBar }) => {
                 drawer={drawer}
                 handleDrawerToggle={handleDrawerToggle} />
             <main className={classes.content}>
-                {
-                    AppBar && (
-
-                        <Box className={classes.appBarContainer}>
-                            <AppBar />
-                        </Box>
-                    )
-                }
                 {children}
             </main>
+
         </div>
+
     )
 }
 export default Menu

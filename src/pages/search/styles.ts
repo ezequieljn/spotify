@@ -28,10 +28,21 @@ export default makeStyles((theme: Theme) =>
             fontSize: 27,
         },
         container: {
-            background: "#f66"
+            background: "#f66",
+            alignItems: 'center',
         },
         inputText: {
 
+        },
+        gridContainerButtonLeftRight: {
+            backgroundSize: 'cover',
+        },
+        containerButtonLeftRight: {
+            display: 'flex',
+            flexDirection: 'row',
+            background: "#fc2",
+            justifyContent: 'space-around',
+            backgroundSize: 'cover',
         }
     }),
 );

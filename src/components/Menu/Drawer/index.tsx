@@ -25,6 +25,7 @@ function DrawerMenu({ drawer, handleDrawerToggle, mobileOpen, container }: Drawe
                     container={container}
                     variant="temporary"
                     anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                    BackdropProps={{ invisible: true }}
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     classes={{
@@ -41,6 +42,7 @@ function DrawerMenu({ drawer, handleDrawerToggle, mobileOpen, container }: Drawe
             </Hidden>
             <Hidden xsDown implementation="css">
                 <Drawer
+                    BackdropProps={{ invisible: true }}
                     classes={{
                         paper: classes.drawerPaper,
                     }}

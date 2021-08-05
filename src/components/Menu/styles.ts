@@ -14,6 +14,7 @@ export default makeStyles((theme: Theme) =>
             height: 75,
             display: 'flex',
             alignItems: 'center',
-        }
+        },
+
     }),
 );

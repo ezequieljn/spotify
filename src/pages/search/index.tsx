@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Menu } from '../../components/Menu'
-import { Grid, IconButton, InputBase, Input, Paper, Box } from '@material-ui/core'
+import { Grid, IconButton, InputBase, Box } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ArtistDescription from '../../components/ArtistDescription'
 import Playlist from '../../components/Playlist'
@@ -16,7 +16,8 @@ import { artistSearchSave } from '../../store/modules/artist/actions'
 import { songSearchSave } from '../../store/modules/song/actions'
 
 import { artistAlbumSongSearchApi } from '../../store/modules/global/action'
-import { albumSearchRequestApi } from '../../store/modules/album/actions'
+
+import { ButtonLeftRight } from '../../components/ButtonLeftRight'
 
 interface playlistProps {
     id: string;
@@ -47,11 +48,16 @@ function SearchPage({ artists, songs, albums }) {
 
     const { album, artist, song } = useSelector((state: StoreState) => state);
 
+
+
     return (
         <Menu >
             <Grid container className={classes.container} spacing={1}>
-                <Grid item md={2}>
-                    <p>oii</p>
+                <Grid item xs={false} sm={false} md={2} className={classes.gridContainerButtonLeftRight}>
+                    <Box className={classes.containerButtonLeftRight}>
+                        <ButtonLeftRight left />
+                        <ButtonLeftRight right />
+                    </Box>
                 </Grid>
                 <Grid item md={6}>
                     <Box component="form" className={classes.root}>
@@ -154,8 +160,5 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         }
     }
 }
-
-
-
 
 export default SearchPage
