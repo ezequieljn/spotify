@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Menu } from '../../components/Menu'
-import { Grid, IconButton, InputBase, Box } from '@material-ui/core'
+import { Grid, IconButton, InputBase, Box, Typography } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
 import ArtistDescription from '../../components/ArtistDescription'
 import Playlist from '../../components/Playlist'
@@ -14,7 +14,7 @@ import { StoreState } from '../../store/createStore';
 import { albumSearchSave } from '../../store/modules/album/actions'
 import { artistSearchSave } from '../../store/modules/artist/actions'
 import { songSearchSave } from '../../store/modules/song/actions'
-
+import Link from 'next/link'
 import { artistAlbumSongSearchApi } from '../../store/modules/global/action'
 
 import { ButtonLeftRight } from '../../components/ButtonLeftRight'
@@ -118,11 +118,14 @@ function SearchPage({ artists, songs, albums }) {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Grid container spacing={2}>
+                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                            <Typography>{Album}</Typography>
+                        </Grid>
                         {
                             album.data.map(item => (
                                 <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id} >
                                     <Album
-
+                                        id={item.id}
                                         artist={item.artist}
                                         photo={item.image}
                                         album={item.name}
