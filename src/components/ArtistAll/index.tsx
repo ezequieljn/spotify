@@ -23,8 +23,8 @@ function ArtistAll({ artist, photo }: ArtistProps) {
                 />
             </Box>
             <Box className={classes.containerDescription}>
-                <p>{artist}</p>
-                <p>Artista</p>
+                <p className={classes.textColor}>{artist}</p>
+                <p className={classes.textColor}>Artista</p>
             </Box>
         </Box>
     )

@@ -17,7 +17,7 @@ export const themeYellow = createTheme({
             default: "#FDED72"
         },
         text: {
-            primary: "#121212",
+            primary: "#434343",
             secondary: "#adadad",
             disabled: "#fff",
             hint: "rgba(0, 0, 0, 0.38)",

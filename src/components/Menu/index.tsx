@@ -33,22 +33,21 @@ const Menu: React.FC<Props> = ({ window, children, Player }) => {
         setMobileOpen(!mobileOpen);
     };
 
-    const { setTheme, theme } = useTheme()
+    const { changeTheme, theme } = useTheme()
 
-    console.log(theme)
     const drawer = (
         <div>
 
             <List>
-                <ListItemIcon text="Início" icon={InicioBlackSvg} />
-                <ListItemIcon text="Buscar" icon={BuscarBlackSvg} />
-                <ListItemIcon text="Sua Biblioteca" icon={BibliotecaBlackSvg} />
+                <ListItemIcon text="Início" icon={theme === "dark" ? InicioSvg : InicioBlackSvg} />
+                <ListItemIcon text="Buscar" icon={theme === "dark" ? BuscarSvg : BuscarBlackSvg} />
+                <ListItemIcon text="Sua Biblioteca" icon={theme === "dark" ? BibliotecaSvg : BibliotecaBlackSvg} />
             </List>
             <Divider />
             <List>
-                <button onClick={() => setTheme('dark')}>dark</button>
-                <button onClick={() => setTheme('yellow')}>yellow</button>
-                <button onClick={() => setTheme('purple')}>purple</button>
+                <button onClick={() => changeTheme('dark')}>dark</button>
+                <button onClick={() => changeTheme('yellow')}>yellow</button>
+                <button onClick={() => changeTheme('purple')}>purple</button>
                 <p>{theme}</p>
             </List>
         </div>

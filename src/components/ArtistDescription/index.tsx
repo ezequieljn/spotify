@@ -21,10 +21,10 @@ function ArtistDescription({ name, photo }: ArtistDescriptionProsp) {
                 />
             </Box>
             <Box>
-                <Typography variant="h4">{name}</Typography>
+                <Typography variant="h4" className={classes.titleName}>{name}</Typography>
             </Box>
             <Box className={classes.artistContainer}>
-                <Typography variant="body2">ARTISTA</Typography>
+                <Typography variant="body2" className={classes.titleArtist}>ARTISTA</Typography>
             </Box>
         </Paper>
     )

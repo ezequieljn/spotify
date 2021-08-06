@@ -39,6 +39,9 @@ export default makeStyles((theme: Theme) =>
         },
         containerMusicBodyTextSub: {
             color: theme.palette.text.secondary
+        },
+        textColor: {
+            color: theme.palette.text.secondary,
         }
     }),
 );

@@ -43,14 +43,14 @@ function SongBody({
                 setMusicCurrent({ nameMusic: name, nameArtist: artist })
             }}>
                 <Box className={classes.containerMusicBodyIndex}>
-                    <p>{index}</p>
+                    <p className={classes.textColor}>{index}</p>
                 </Box >
                 <Box className={classes.containerMusicBodyDescripition}>
                     <Typography variant="subtitle1" className={classes.containerMusicBodyText}>{name}</Typography>
                     <Typography variant="subtitle2" id="teste" className={classes.containerMusicBodyTextSub}>{artist}</Typography>
                 </Box>
                 <Box className={classes.containerMusicBodyTime}>
-                    <p>{`${minutes}:00`}</p>
+                    <p className={classes.textColor}>{`${minutes}:00`}</p>
                 </Box>
             </Box>
 

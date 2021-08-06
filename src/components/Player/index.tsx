@@ -79,7 +79,7 @@ function Player({ musicCurrent, album, setMusicCurrent, setPlayerState, playerSt
     return (
         <Box className={classes.appBar}>
             <Box className={classes.containerBoxName}>
-                <Box>
+                <Box className={classes.containerBox}>
                     <Typography variant="subtitle1">{musicCurrent.nameMusic}</Typography>
                     <Typography variant="caption">{musicCurrent.nameArtist}</Typography>
                 </Box>

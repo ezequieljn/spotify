@@ -40,6 +40,8 @@ export default makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
+            marginTop: theme.spacing(2),
+            marginBottom: theme.spacing(2),
         },
         containerMusicHeaderContainer: {
             display: 'flex',
@@ -73,6 +75,9 @@ export default makeStyles((theme: Theme) =>
         divider: {
             marginTop: 10,
             marginBottom: 10,
+        },
+        textColor: {
+            color: theme.palette.text.primary,
         }
     }),
 );

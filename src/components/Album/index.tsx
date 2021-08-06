@@ -27,8 +27,8 @@ function Album({ artist, photo, album, id }: AlbumProps) {
                     />
                 </Box>
                 <Box className={classes.containerDescription}>
-                    <p>{album}</p>
-                    <p>{artist}</p>
+                    <p className={classes.textColor}>{album}</p>
+                    <p className={classes.textColor}>{artist}</p>
                 </Box>
             </Box>
         </Link>

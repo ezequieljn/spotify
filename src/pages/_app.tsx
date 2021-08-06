@@ -13,7 +13,7 @@ import { wrapper } from '../store';
 
 function MyApp({ Component, pageProps }: AppProps) {
     const store: any = useStore();
-    const [theme, setTheme] = useState<null | string>(null)
+
 
     useEffect(() => {
         const jssStyles = document.querySelector('#jss-server-side');

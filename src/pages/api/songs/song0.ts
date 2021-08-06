@@ -5,7 +5,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "Wanna Be Startin Somethin",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "6"
     },
     {
@@ -13,7 +13,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "Baby Be Mine",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "3"
     },
     {
@@ -21,7 +21,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "The Girl Is Mine",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "2"
     },
     {
@@ -29,7 +29,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "Thriller",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "5"
     },
     {
@@ -37,7 +37,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "Beat It",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "3"
     },
     {
@@ -45,7 +45,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "Billie Jean",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "5"
     },
     {
@@ -53,7 +53,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "Human Nature",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "4"
     },
     {
@@ -61,7 +61,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "P.Y.T. (Pretty Young Thing)",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "6"
     },
     {
@@ -69,7 +69,7 @@ export const soundtracks = [
         album_id: "ac753815-3051-5b29-aa3b-8a5d44ca96a5",
         artist: "Michael Jackson",
         name: "The Lady In My Life",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
+        image: "https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97",
         minutes: "7"
     },
 
@@ -80,7 +80,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Bad",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "7"
     },
     {
@@ -88,7 +88,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "The Way You Make Me Feel",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "2"
     },
     {
@@ -96,7 +96,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Speed Demon",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "3"
     },
     {
@@ -104,7 +104,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Liberian Girl",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "5"
     },
     {
@@ -112,7 +112,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Just Good Friends",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "5"
     },
     {
@@ -120,7 +120,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Another Part Of Me",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "4"
     },
     {
@@ -128,7 +128,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Man In The Mirror",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "6"
     },
     {
@@ -136,7 +136,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "I Just Can't Stop Loving You",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "2"
     },
     {
@@ -144,7 +144,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Dirty Diana",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "5"
     },
     {
@@ -152,7 +152,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Smooth Criminal",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "4"
     },
     {
@@ -160,7 +160,7 @@ export const soundtracks = [
         album_id: "8ebf0b68-52eb-511e-9676-36822bb8b354",
         artist: "Michael Jackson",
         name: "Leave Me Alone",
-        photoAlbum: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
+        image: "https://i.scdn.co/image/ab67616d00001e021bb21d27effb96a1d0fe8d6d",
         minutes: "2"
     },
 ]

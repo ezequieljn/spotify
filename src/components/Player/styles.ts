@@ -19,6 +19,9 @@ export default makeStyles((theme: Theme) =>
             flexDirection: 'row',
             borderTop: '1px solid',
         },
+        containerBox: {
+            marginLeft: theme.spacing(2),
+        },
         containerBoxName: {
             display: 'flex',
             flex: 3,

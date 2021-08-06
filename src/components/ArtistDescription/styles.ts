@@ -26,5 +26,11 @@ export default makeStyles((theme: Theme) =>
             alignItems: "center",
             borderRadius: 50,
         },
+        titleName: {
+            color: theme.palette.text.primary,
+        },
+        titleArtist: {
+            color: theme.palette.text.primary,
+        }
     }),
 );

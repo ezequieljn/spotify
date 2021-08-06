@@ -19,6 +19,9 @@ export default makeStyles((theme: Theme) =>
         },
         containerDescription: {
             padding: theme.spacing(2),
+        },
+        textColor: {
+            color: theme.palette.text.primary,
         }
     }),
 );

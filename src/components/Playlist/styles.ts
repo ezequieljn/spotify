@@ -30,5 +30,8 @@ export default makeStyles((theme: Theme) =>
             flexDirection: "column",
             justifyContent: "space-between"
         },
+        textColor: {
+            color: theme.palette.text.primary,
+        }
     }),
 );

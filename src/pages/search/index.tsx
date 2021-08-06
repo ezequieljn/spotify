@@ -93,7 +93,7 @@ function SearchPage({ artists, songs, albums }) {
                         song.data.map(item => <Playlist
                             key={item.id}
                             name={item.name}
-                            photoAlbum={item.image}
+                            image={item.image}
                             minutes={item.minutes}
                             artist={item.artist}
                         />)

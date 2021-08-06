@@ -7,7 +7,9 @@ export default makeStyles((theme: Theme) =>
                 backgroundColor: theme.palette.secondary.main,
             },
             borderRadius: 5
-
+        },
+        text: {
+            color: theme.palette.text.primary,
         }
     }),
 );

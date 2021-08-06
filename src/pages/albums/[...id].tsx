@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Divider, Grid, Typography } from '@material-ui/core';
 import Head from 'next/head';
 import { Menu } from '../../components/Menu';
@@ -14,8 +14,9 @@ import { GetServerSideProps } from 'next';
 import { api } from '../../services';
 import BoxBottomMenu from '../../components/BoxBottomMenu';
 import { format } from 'date-fns';
-
+import { parseCookies } from 'nookies'
 import Player from '../../components/Player'
+import { useTheme } from '../../hooks/theme';
 
 interface songProps {
     id: string;
@@ -29,13 +30,20 @@ interface songProps {
 }
 
 interface albumProps {
-    album: songProps[]
+    album: songProps[],
+    spotifyTheme: 'dark' | 'yellow' | 'purple',
 }
 
-const Album: React.FC<albumProps> = ({ album }) => {
+const Album: React.FC<albumProps> = ({ album, spotifyTheme }) => {
     const classes = useStyles()
     const [playerState, setPlayerState] = useState(0)
     const [musicCurrent, setMusicCurrent] = useState({ nameMusic: '', nameArtist: '' })
+
+    const { changeTheme } = useTheme()
+
+    useEffect(() => {
+        changeTheme(spotifyTheme)
+    }, [])
 
     function PlayerEdit() {
         return <Player album={album} setPlayerState={setPlayerState} playerState={playerState} musicCurrent={musicCurrent} setMusicCurrent={setMusicCurrent} />
@@ -59,9 +67,9 @@ const Album: React.FC<albumProps> = ({ album }) => {
                     <Box className={classes.descriptionInfo}>
                         <Box>
                             <Box className={classes.descriptionAlbum}>
-                                <p>Álbum</p>
+                                <p className={classes.textColor}>Álbum</p>
                             </Box>
-                            <Typography variant="h1">{album[0].name_album}</Typography>
+                            <Typography variant="h1" className={classes.textColor}>{album[0].name_album}</Typography>
                             <Box className={classes.descriptionArtistImageContainer}>
                                 <Image
                                     className={classes.descriptionArtistImageMain}
@@ -70,7 +78,7 @@ const Album: React.FC<albumProps> = ({ album }) => {
                                     height="30"
                                 />
                                 <Box className={classes.description}>
-                                    <p>{`${album[0].artist} • ${format(new Date(album[0].created_at), 'yyyy')} • ${album.length} música, ${album.map(item => item.minutes).reduce((s, i) => s + i)} min`}</p>
+                                    <p className={classes.textColor}>{`${album[0].artist} • ${format(new Date(album[0].created_at), 'yyyy')} • ${album.length} música, ${album.map(item => item.minutes).reduce((s, i) => s + i)} min`}</p>
                                 </Box>
                             </Box>
                         </Box>
@@ -115,15 +123,17 @@ const Album: React.FC<albumProps> = ({ album }) => {
 export default Album;
 
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-    const { id } = query
-
+export const getServerSideProps: GetServerSideProps = async (props) => {
+    const { id } = props.query
+    const cookies = parseCookies(props)
+    console.log(":: ", cookies.spotifyTheme)
     try {
         const { data: response } = await api.get(`albums/${id[0]}`)
 
         return {
             props: {
-                album: response
+                album: response,
+                spotifyTheme: cookies.spotifyTheme || 'dark'
             }
         }
 
@@ -133,7 +143,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
     return {
         props: {
-
+            spotifyTheme: cookies.spotifyTheme || 'dark'
         }
     }
 }

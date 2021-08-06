@@ -5,15 +5,15 @@ import Image from 'next/image'
 
 interface PlaylistProps {
     name: string;
-    photoAlbum: string;
+    image: string;
     artist: string;
     minutes: string;
 
 }
 
-function Playlist({ name, photoAlbum, minutes, artist }: PlaylistProps) {
+function Playlist({ name, image, minutes, artist }: PlaylistProps) {
 
-    console.log("photoAlbum: ", photoAlbum)
+    console.log("image: ", image)
 
 
     const classes = useStyles()
@@ -21,18 +21,18 @@ function Playlist({ name, photoAlbum, minutes, artist }: PlaylistProps) {
         <Box display="flex" flexDirection="row" className={classes.image}>
             <Box display="flex" flexDirection="row" className={classes.imageMusic}>
                 <Image
-                    src={photoAlbum}
+                    src={image}
                     height={50}
                     width={50}
                     className={classes.albumImageContainer}
                 />
                 <Box className={classes.musicDescription}>
-                    <p>{name}</p>
-                    <p>{artist}</p>
+                    <p className={classes.textColor}>{name}</p>
+                    <p className={classes.textColor}>{artist}</p>
                 </Box>
             </Box>
             <Box justifyContent="center" alignItems="center" className={classes.time}>
-                <Typography variant="body2">{`${minutes}:00`}</Typography>
+                <Typography variant="body2" className={classes.textColor}>{`${minutes}:00`}</Typography>
             </Box>
         </Box>
     )

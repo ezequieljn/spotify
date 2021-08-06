@@ -21,7 +21,7 @@ function ListItemIcon({ text, icon: Icon }: ListitemiconType) {
                     Icon && <Image src={Icon} color={"#f63"} />
                 }
             </Listitemicon>
-            <ListItemText primary={text} />
+            <ListItemText primary={text} className={classes.text} />
         </ListItem>
     )
 }
