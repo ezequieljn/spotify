@@ -7,17 +7,17 @@ export const theme = createTheme({
             white: "#fff",
         },
         primary: {
-            main: "#b37feb",
+            main: "#FFCC00",
         },
         secondary: {
-            main: "#9254de",
+            main: "#E5B800",
         },
         background: {
-            paper: "#531dab",
-            default: "#722ed1"
+            paper: "#FDDD48",
+            default: "#FDED72"
         },
         text: {
-            primary: "#fff",
+            primary: "#121212",
             secondary: "#adadad",
             disabled: "#fff",
             hint: "rgba(0, 0, 0, 0.38)",

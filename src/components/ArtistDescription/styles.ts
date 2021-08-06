@@ -4,7 +4,7 @@ export default makeStyles((theme: Theme) =>
     createStyles({
         containerPaper: {
             padding: 20,
-            backgroundColor: "#181818"
+            backgroundColor: theme.palette.background.paper,
         },
         imagemArtist: {
             margin: 20
@@ -15,8 +15,10 @@ export default makeStyles((theme: Theme) =>
             borderRadius: 50
         },
         artistContainer: {
+            borderColor: theme.palette.text.primary,
+            borderWidth: 1,
             padding: 1,
-            background: "#131313",
+            background: theme.palette.primary.main,
             width: 70,
             height: 25,
             display: "flex",

@@ -13,12 +13,12 @@ interface ListitemiconType {
 }
 
 function ListItemIcon({ text, icon: Icon }: ListitemiconType) {
-
+    const classes = useStyle()
     return (
-        <ListItem button key={text}>
+        <ListItem button key={text} className={classes.container}>
             <Listitemicon>
                 {
-                    Icon && <Image src={Icon} color="#fff" />
+                    Icon && <Image src={Icon} color={"#f63"} />
                 }
             </Listitemicon>
             <ListItemText primary={text} />

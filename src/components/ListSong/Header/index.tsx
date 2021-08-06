@@ -19,7 +19,6 @@ function SongHeader() {
                     <BiTime color="#adadad" size={20} />
                 </Box>
             </Box>
-            <Divider />
         </>
     )
 }

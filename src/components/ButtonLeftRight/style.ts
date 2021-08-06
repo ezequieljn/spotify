@@ -4,7 +4,7 @@ export default makeStyles((theme: Theme) =>
     createStyles({
         containerNoDrop: {
             display: "flex",
-            background: "#000",
+            background: theme.palette.background.paper,
             width: 35,
             height: 35,
             borderRadius: 35 / 2,
@@ -16,7 +16,7 @@ export default makeStyles((theme: Theme) =>
         },
         container: {
             display: "flex",
-            background: "#000",
+            background: theme.palette.background.paper,
             width: 35,
             height: 35,
             borderRadius: 35 / 2,

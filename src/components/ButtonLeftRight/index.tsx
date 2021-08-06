@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
 import useStyle from './style'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
@@ -13,7 +13,7 @@ interface ButtonLeftRightProps {
 
 const ButtonLeftRight: React.FC<ButtonLeftRightProps> = ({ left, right, disabled }) => {
     const noneIcon = left && right ? true : false
-
+    const theme = useTheme()
     const classes = useStyle()
 
     return (
@@ -23,18 +23,18 @@ const ButtonLeftRight: React.FC<ButtonLeftRightProps> = ({ left, right, disabled
                     <Box className={classes.containerNoDrop}>
                         {
                             noneIcon ? null :
-                                left ? <FiChevronLeft size={27} /> :
+                                left ? <FiChevronLeft size={27} color={theme.palette.text.disabled} /> :
                                     right ?
-                                        <FiChevronRight size={27} />
+                                        <FiChevronRight size={27} color={theme.palette.text.disabled} />
                                         : null
                         }
                     </Box> :
                     <Box className={classes.container}>
                         {
                             noneIcon ? null :
-                                left ? <FiChevronLeft size={27} /> :
+                                left ? <FiChevronLeft size={27} color={theme.palette.text.disabled} /> :
                                     right ?
-                                        <FiChevronRight size={27} />
+                                        <FiChevronRight size={27} color={theme.palette.text.disabled} />
                                         : null
                         }
                     </Box>

@@ -8,10 +8,7 @@ export default makeStyles((theme: Theme) =>
             flexDirection: 'row',
             transition: "background 0.3s",
             "&:hover": {
-                backgroundColor: "#2a2a2a",
-                containerMusicBodyTextSub: {
-                    color: "#6f9"
-                }
+                backgroundColor: theme.palette.background.paper,
             },
             borderRadius: 5
         },
@@ -38,10 +35,10 @@ export default makeStyles((theme: Theme) =>
             height: 60,
         },
         containerMusicBodyText: {
-            color: "#fff"
+            color: theme.palette.text.primary
         },
         containerMusicBodyTextSub: {
-            color: "#adadad"
+            color: theme.palette.text.secondary
         }
     }),
 );

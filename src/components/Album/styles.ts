@@ -4,11 +4,11 @@ export default makeStyles((theme: Theme) =>
     createStyles({
         albumContainer: {
             cursor: 'pointer',
-            background: "#181818",
+            background: theme.palette.secondary.main,
             borderRadius: 5,
             transition: "background 0.3s",
             "&:hover": {
-                background: '#282828'
+                background: theme.palette.primary.main
             }
         },
         containerImage: {

@@ -70,6 +70,9 @@ export default makeStyles((theme: Theme) =>
         containerMusicHeaderText: {
             color: "#adadad"
         },
-
+        divider: {
+            marginTop: 10,
+            marginBottom: 10,
+        }
     }),
 );

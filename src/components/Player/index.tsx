@@ -112,7 +112,7 @@ function Player({ musicCurrent, album, setMusicCurrent, setPlayerState, playerSt
                             aria-labelledby="input-slider"
                             className={classes.slider}
                         />
-                        <p>6:00</p>
+                        <p>{`9999`}</p>
                     </Box>
                 </Box>
             </Box>

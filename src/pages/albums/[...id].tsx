@@ -24,6 +24,7 @@ interface songProps {
     minutes: number;
     name_album: string;
     artist: string;
+    image: string;
     created_at: string;
 }
 
@@ -50,7 +51,7 @@ const Album: React.FC<albumProps> = ({ album }) => {
                     <Box className={classes.descriptionImageContainer}>
                         <Image
                             className={classes.descriptionImageMain}
-                            src="https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97"
+                            src={album[0].image}
                             width="200"
                             height="200"
                         />
@@ -64,7 +65,7 @@ const Album: React.FC<albumProps> = ({ album }) => {
                             <Box className={classes.descriptionArtistImageContainer}>
                                 <Image
                                     className={classes.descriptionArtistImageMain}
-                                    src="https://i.scdn.co/image/ab67616d00001e02de437d960dda1ac0a3586d97"
+                                    src={album[0].image}
                                     width="30"
                                     height="30"
                                 />
@@ -86,6 +87,7 @@ const Album: React.FC<albumProps> = ({ album }) => {
                 </Box>
                 <Box>
                     <SongHeader />
+                    <Divider className={classes.divider} />
                     {
                         album && album.map((song, index) => (
                             <SongBody

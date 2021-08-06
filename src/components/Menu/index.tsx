@@ -11,6 +11,10 @@ import InicioSvg from '../../assets/menu/inicio.svg'
 import BuscarSvg from '../../assets/menu/buscar.svg'
 import BibliotecaSvg from '../../assets/menu/biblioteca.svg'
 
+import InicioBlackSvg from '../../assets/menu/inicio_black.svg'
+import BuscarBlackSvg from '../../assets/menu/buscar_black.svg'
+import BibliotecaBlackSvg from '../../assets/menu/biblioteca_black.svg'
+
 
 
 interface Props {
@@ -33,9 +37,9 @@ const Menu: React.FC<Props> = ({ window, children, Player }) => {
         <div>
 
             <List>
-                <ListItemIcon text="Início" icon={InicioSvg} />
-                <ListItemIcon text="Buscar" icon={BuscarSvg} />
-                <ListItemIcon text="Sua Biblioteca" icon={BibliotecaSvg} />
+                <ListItemIcon text="Início" icon={InicioBlackSvg} />
+                <ListItemIcon text="Buscar" icon={BuscarBlackSvg} />
+                <ListItemIcon text="Sua Biblioteca" icon={BibliotecaBlackSvg} />
             </List>
             <Divider />
             <List>

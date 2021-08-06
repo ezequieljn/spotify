@@ -10,7 +10,7 @@ export default makeStyles((theme: Theme) =>
             borderRadius: 3,
             transition: "background 0.7s",
             "&:hover": {
-                background: '#282828'
+                background: theme.palette.secondary.main
             },
             padding: theme.spacing(1),
             display: "flex",

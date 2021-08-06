@@ -12,7 +12,7 @@ export interface songProps {
     album_id: string;
     artist: string;
     name: string;
-    photoAlbum: string;
+    image: string;
     minutes: string;
 }
 
