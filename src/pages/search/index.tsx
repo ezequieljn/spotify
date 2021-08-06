@@ -35,7 +35,7 @@ function SearchPage({ artists, songs, albums }) {
         dispatch(songSearchSave(songs))
     }, [])
 
-
+    console.log(">> ", api.defaults.baseURL)
     useEffect(() => {
         const timeoutId = setTimeout(() => dispatch(artistAlbumSongSearchApi(searchAlbum, 1)), 500);
         return () => clearTimeout(timeoutId);
@@ -43,12 +43,11 @@ function SearchPage({ artists, songs, albums }) {
 
 
     function handleScroll() {
-        console.log("123333")
+        console.log("scroll")
         dispatch(artistAlbumSongSearchApi(searchAlbum, page + 1))
         setPage(prop => prop + 1)
     }
     const { album, artist, song, loading } = useSelector((state: StoreState) => state);
-    console.log("ççç", !loading.api)
 
     return (
         <Menu >
