@@ -36,20 +36,18 @@ interface albumProps {
 
 const Album: React.FC<albumProps> = ({ album, spotifyTheme }) => {
     const classes = useStyles()
-    const [playerState, setPlayerState] = useState(0)
-    const [musicCurrent, setMusicCurrent] = useState({ nameMusic: '', nameArtist: '' })
-    console.log(spotifyTheme)
+    const [musicCurrent, setMusicCurrent] = useState({ nameMusic: '', nameArtist: '', time: '' })
 
     const { changeTheme } = useTheme()
 
-    // useEffect(() => {
-    //     if (spotifyTheme) {
-    //         changeTheme(spotifyTheme)
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (spotifyTheme) {
+            changeTheme(spotifyTheme)
+        }
+    }, [])
 
     function PlayerEdit() {
-        return <Player album={album} setPlayerState={setPlayerState} playerState={playerState} musicCurrent={musicCurrent} setMusicCurrent={setMusicCurrent} />
+        return <Player album={album} musicCurrent={musicCurrent} setMusicCurrent={setMusicCurrent} />
     }
 
     return (
@@ -110,7 +108,6 @@ const Album: React.FC<albumProps> = ({ album, spotifyTheme }) => {
                             <SongBody
                                 key={song.id}
                                 id={song.id}
-                                setPlayerState={setPlayerState}
                                 setMusicCurrent={setMusicCurrent}
                                 index={index + 1}
                                 artist={song.artist}
@@ -137,10 +134,6 @@ export const getServerSideProps: GetServerSideProps = async (props) => {
     const cookies = parseCookies(props)
 
     try {
-
-
-
-
         const { data: response } = await api.get(`albums/${id[0]}`)
         console.log("response: ", response)
         return {

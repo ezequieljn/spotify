@@ -7,7 +7,8 @@ import { FaHashtag } from 'react-icons/fa'
 
 interface MusicCurrentProps {
     nameMusic: string;
-    nameArtist: string
+    nameArtist: string;
+    time: string;
 }
 
 interface SongBodyProps {
@@ -19,7 +20,6 @@ interface SongBodyProps {
     artist: string;
     created_at: string;
     setMusicCurrent: (MusicCurrentProps) => void;
-    setPlayerState: (number) => void;
 }
 
 
@@ -32,15 +32,14 @@ function SongBody({
     index,
     artist,
     created_at,
-    setPlayerState,
     setMusicCurrent
 }: SongBodyProps) {
     const classes = useStyles()
     return (
         <>
             <Box className={classes.containerMusicBodyContainer} onClick={() => {
-                setPlayerState(0)
-                setMusicCurrent({ nameMusic: name, nameArtist: artist })
+
+                setMusicCurrent({ nameMusic: name, nameArtist: artist, time: minutes })
             }}>
                 <Box className={classes.containerMusicBodyIndex}>
                     <p className={classes.textColor}>{index}</p>

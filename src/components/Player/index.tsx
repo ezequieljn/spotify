@@ -5,13 +5,14 @@ import { AiFillPauseCircle, AiFillPlayCircle, AiFillStepBackward, AiFillStepForw
 import { FaRandom } from 'react-icons/fa'
 import { BsFillVolumeMuteFill, BsFillVolumeUpFill, BsVolumeDown, BsVolumeDownFill } from 'react-icons/bs'
 import { RiComputerLine, RiPlayList2Fill } from 'react-icons/ri'
+import { useTheme } from '@material-ui/core'
+
 
 interface MusicCurrentProps {
     nameMusic: string;
-    nameArtist: string
+    nameArtist: string;
+    time: string;
 }
-
-
 
 interface songProps {
     id: string;
@@ -26,14 +27,14 @@ interface songProps {
 interface PlayerProps {
     musicCurrent: MusicCurrentProps;
     setMusicCurrent: (MusicCurrentProps) => void;
-    album: songProps[],
-    playerState: number;
-    setPlayerState: (number) => void;
+    album: songProps[];
 }
 
-function Player({ musicCurrent, album, setMusicCurrent, setPlayerState, playerState }: PlayerProps) {
+function Player({ musicCurrent, album, setMusicCurrent, }: PlayerProps) {
     const classes = useStyles()
 
+
+    const [playerState, setPlayerState] = useState(0)
 
     const [volume, setVolume] = useState(0)
     const [player, setPlayer] = useState(false)
@@ -45,15 +46,19 @@ function Player({ musicCurrent, album, setMusicCurrent, setPlayerState, playerSt
         setPlayerState(newValue);
     };
 
-    let intervalID;
     useEffect(() => {
         if (musicCurrent.nameMusic === '') {
             setMusicCurrent({
                 nameMusic: album[0].name,
                 nameArtist: album[0].artist,
+                time: album[0].minutes,
             })
         }
+    }, []);
 
+
+    let intervalID;
+    useEffect(() => {
         if (player && playerState < 99) {
             intervalID = setInterval(() => {
                 setPlayerState(prop => prop + 2);
@@ -74,45 +79,45 @@ function Player({ musicCurrent, album, setMusicCurrent, setPlayerState, playerSt
         }
     }, [playerState])
 
-
+    const theme = useTheme()
 
     return (
         <Box className={classes.appBar}>
             <Box className={classes.containerBoxName}>
                 <Box className={classes.containerBox}>
-                    <Typography variant="subtitle1">{musicCurrent.nameMusic}</Typography>
-                    <Typography variant="caption">{musicCurrent.nameArtist}</Typography>
+                    <Typography variant="subtitle1" className={classes.textColor} >{musicCurrent.nameMusic}</Typography>
+                    <Typography variant="caption" className={classes.textColor} >{musicCurrent.nameArtist}</Typography>
                 </Box>
                 <Box style={{ marginLeft: 15 }}>
                     {
-                        musicCurrent.nameMusic && <AiOutlineHeart />
+                        musicCurrent.nameMusic && <AiOutlineHeart color={theme.palette.text.primary} />
                     }
 
                 </Box>
             </Box>
             <Box className={classes.containerBoxPlayer}>
                 <Box className={classes.containerBoxPlayerIcon}>
-                    <FaRandom size={15} className={classes.marginLeftRight20} />
-                    <AiFillStepBackward size={15} className={classes.marginLeftRight20} onClick={() => setPlayerState(0)} />
+                    <FaRandom size={15} className={classes.marginLeftRight20} color={theme.palette.text.primary} />
+                    <AiFillStepBackward size={15} className={classes.marginLeftRight20} onClick={() => setPlayerState(0)} color={theme.palette.text.primary} />
                     {
                         player ?
-                            <AiFillPauseCircle size={35} className={classes.marginLeftRight20} onClick={() => setPlayer(prop => !prop)} /> :
+                            <AiFillPauseCircle size={35} className={classes.marginLeftRight20} onClick={() => setPlayer(prop => !prop)} color={theme.palette.text.primary} /> :
 
-                            <AiFillPlayCircle size={35} className={classes.marginLeftRight20} onClick={() => setPlayer(prop => !prop)} />
+                            <AiFillPlayCircle size={35} className={classes.marginLeftRight20} onClick={() => setPlayer(prop => !prop)} color={theme.palette.text.primary} />
                     }
-                    <AiFillStepForward size={15} className={classes.marginLeftRight20} onClick={() => setPlayerState(0)} />
-                    <AiOutlineRetweet size={15} className={classes.marginLeftRight20} />
+                    <AiFillStepForward size={15} className={classes.marginLeftRight20} onClick={() => setPlayerState(0)} color={theme.palette.text.primary} />
+                    <AiOutlineRetweet size={15} className={classes.marginLeftRight20} color={theme.palette.text.primary} />
                 </Box>
                 <Box >
                     <Box className={classes.containerBoxPlayerTime}>
-                        <p>0:00</p>
+                        <p className={classes.textColor}  >0:00</p>
                         <Slider
                             value={playerState}
                             onChange={handleChangePlayer}
                             aria-labelledby="input-slider"
                             className={classes.slider}
                         />
-                        <p>{`9999`}</p>
+                        <p className={classes.textColor} >{`${musicCurrent.time}:00`}</p>
                     </Box>
                 </Box>
             </Box>
@@ -120,15 +125,15 @@ function Player({ musicCurrent, album, setMusicCurrent, setPlayerState, playerSt
                 <Grid container spacing={2} >
                     <Grid item >
                         <Box p={1}>
-                            <RiPlayList2Fill size={20} className={classes.marginLeftRight5} />
-                            <RiComputerLine size={20} className={classes.marginLeftRight5} />
-                            <BsVolumeDown size={20} className={classes.marginLeftRight5} />
+                            <RiPlayList2Fill size={20} className={classes.marginLeftRight5} color={theme.palette.text.primary} />
+                            <RiComputerLine size={20} className={classes.marginLeftRight5} color={theme.palette.text.primary} />
+                            <BsVolumeDown size={20} className={classes.marginLeftRight5} color={theme.palette.text.primary} />
                             {
                                 volume == 0 ?
-                                    <BsFillVolumeMuteFill size={20} className={classes.marginLeftRight5} /> :
+                                    <BsFillVolumeMuteFill size={20} className={classes.marginLeftRight5} color={theme.palette.text.primary} /> :
                                     volume > 50 ?
-                                        <BsFillVolumeUpFill size={20} className={classes.marginLeftRight5} /> :
-                                        <BsVolumeDownFill size={20} className={classes.marginLeftRight5} />
+                                        <BsFillVolumeUpFill size={20} className={classes.marginLeftRight5} color={theme.palette.text.primary} /> :
+                                        <BsVolumeDownFill size={20} className={classes.marginLeftRight5} color={theme.palette.text.primary} />
 
                             }
                         </Box>

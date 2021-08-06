@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react';
-import { Divider } from '@material-ui/core';
+import { Box, Divider, Typography } from '@material-ui/core';
 
 import List from '@material-ui/core/List';
 
@@ -16,6 +16,10 @@ import BuscarBlackSvg from '../../assets/menu/buscar_black.svg'
 import BibliotecaBlackSvg from '../../assets/menu/biblioteca_black.svg'
 
 import { useTheme } from '../../hooks/theme'
+import Link from 'next/link'
+
+import { IoIosMore } from 'react-icons/io'
+import { useTheme as useThemeMaterial } from '@material-ui/core'
 
 interface Props {
     window?: () => Window;
@@ -32,23 +36,29 @@ const Menu: React.FC<Props> = ({ window, children, Player }) => {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
+    const themeMaterial = useThemeMaterial()
     const { changeTheme, theme } = useTheme()
 
     const drawer = (
         <div>
-
+            <Box className={classes.containerIconBox}>
+                <IoIosMore size={30} color={themeMaterial.palette.text.primary} />
+            </Box>
             <List>
-                <ListItemIcon text="Início" icon={theme === "dark" ? InicioSvg : InicioBlackSvg} />
-                <ListItemIcon text="Buscar" icon={theme === "dark" ? BuscarSvg : BuscarBlackSvg} />
-                <ListItemIcon text="Sua Biblioteca" icon={theme === "dark" ? BibliotecaSvg : BibliotecaBlackSvg} />
+                <ListItemIcon text="Início" icon={theme === "yellow" ? InicioBlackSvg : InicioSvg} />
+                <ListItemIcon text="Buscar" icon={theme === "yellow" ? BuscarBlackSvg : BuscarSvg} />
+                <ListItemIcon text="Sua Biblioteca" icon={theme === "yellow" ? BibliotecaBlackSvg : BibliotecaSvg} />
             </List>
             <Divider />
             <List>
-                <button onClick={() => changeTheme('dark')}>dark</button>
-                <button onClick={() => changeTheme('yellow')}>yellow</button>
-                <button onClick={() => changeTheme('purple')}>purple</button>
-                <p>{theme}</p>
+                <Box className={classes.conteinerThemeText}>
+                    <Typography className={classes.textColor} variant="h6">Tema</Typography>
+                </Box>
+                <Box className={classes.conteinerTheme}>
+                    <button className={classes.containerButton} onClick={() => changeTheme('dark')}>Dark</button>
+                    <button className={classes.containerButton} onClick={() => changeTheme('yellow')}>Yellow</button>
+                    <button className={classes.containerButton} onClick={() => changeTheme('purple')}>Purple</button>
+                </Box>
             </List>
         </div>
     );

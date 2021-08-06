@@ -86,6 +86,9 @@ export default makeStyles((theme: Theme) =>
         marginLeftRight5: {
             marginLeft: 3,
             marginRight: 2
+        },
+        textColor: {
+            color: theme.palette.text.primary,
         }
     }),
 );

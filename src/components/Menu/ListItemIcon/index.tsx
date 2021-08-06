@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import useStyle from './styles';
 import Image from 'next/image'
-
+import Link from 'next/link'
 
 interface ListitemiconType {
     text: string;
@@ -15,14 +15,16 @@ interface ListitemiconType {
 function ListItemIcon({ text, icon: Icon }: ListitemiconType) {
     const classes = useStyle()
     return (
-        <ListItem button key={text} className={classes.container}>
-            <Listitemicon>
-                {
-                    Icon && <Image src={Icon} color={"#f63"} />
-                }
-            </Listitemicon>
-            <ListItemText primary={text} className={classes.text} />
-        </ListItem>
+        <Link href={`/search`} passHref>
+            <ListItem button key={text} className={classes.container}>
+                <Listitemicon>
+                    {
+                        Icon && <Image src={Icon} color={"#f63"} />
+                    }
+                </Listitemicon>
+                <ListItemText primary={text} className={classes.text} />
+            </ListItem>
+        </Link>
     )
 }
 

@@ -14,20 +14,27 @@ import { StoreState } from '../../store/createStore';
 import { albumSearchSave } from '../../store/modules/album/actions'
 import { artistSearchSave } from '../../store/modules/artist/actions'
 import { songSearchSave } from '../../store/modules/song/actions'
-import Link from 'next/link'
+import { parseCookies } from 'nookies'
 import { artistAlbumSongSearchApi } from '../../store/modules/global/action'
 import { ButtonLeftRight } from '../../components/ButtonLeftRight'
 import BoxBottomMenu from '../../components/BoxBottomMenu';
 import { InfiniteScroll } from '../../components/InfiniteScroll';
+import { useTheme } from '../../hooks/theme';
 
-
-function SearchPage({ artists, songs, albums }) {
+function SearchPage({ artists, songs, albums, spotifyTheme }) {
     const [searchAlbum, setSearchAlbum] = useState('')
     const [page, setPage] = useState(1)
-    //const [loading, setLoading] = useState(false)
 
     const classes = useStyles()
     const dispatch = useDispatch()
+    const { changeTheme } = useTheme()
+
+    useEffect(() => {
+        if (spotifyTheme) {
+            changeTheme(spotifyTheme)
+        }
+    }, [])
+
 
     useEffect(() => {
         dispatch(albumSearchSave(albums))
@@ -155,14 +162,15 @@ function SearchPage({ artists, songs, albums }) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { artist } = context.query
-
+    const cookies = parseCookies(context)
     if (artist) {
         const { data: artists } = await api.post("artist", { artist })
         const { data: songs } = await api.post("songs", { artist })
         const { data: albums } = await api.post("albums", { artist })
 
         return {
-            props: { artists, songs, albums }
+            props: { artists, songs, albums },
+            spotifyTheme: cookies.spotifyTheme || 'dark'
         }
     }
 
@@ -172,7 +180,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 artistAll: [],
                 artistMain: []
             },
-            songs: [], albums: [],
+            songs: [],
+            albums: [],
+            spotifyTheme: cookies.spotifyTheme || 'dark'
 
         }
     }
