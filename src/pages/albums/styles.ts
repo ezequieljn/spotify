@@ -12,7 +12,8 @@ export default makeStyles((theme: Theme) =>
         },
 
         descriptionImageMain: {
-
+            minHeight: 70,
+            minWidth: 70,
         },
 
         descriptionAlbum: {
@@ -69,9 +70,6 @@ export default makeStyles((theme: Theme) =>
         containerMusicHeaderText: {
             color: "#adadad"
         },
-        boxSize: {
-            width: 60,
-            height: 70,
-        }
+
     }),
 );

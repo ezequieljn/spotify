@@ -12,6 +12,10 @@ interface PlaylistProps {
 }
 
 function Playlist({ name, photoAlbum, minutes, artist }: PlaylistProps) {
+
+    console.log("photoAlbum: ", photoAlbum)
+
+
     const classes = useStyles()
     return (
         <Box display="flex" flexDirection="row" className={classes.image}>
@@ -28,7 +32,7 @@ function Playlist({ name, photoAlbum, minutes, artist }: PlaylistProps) {
                 </Box>
             </Box>
             <Box justifyContent="center" alignItems="center" className={classes.time}>
-                <Typography variant="body2">{minutes}</Typography>
+                <Typography variant="body2">{`${minutes}:00`}</Typography>
             </Box>
         </Box>
     )

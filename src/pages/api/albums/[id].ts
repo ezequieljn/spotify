@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { soundtracks } from './soundtracks'
+import { soundtracks } from './song1'
 
 const show = (req: NextApiRequest, res: NextApiResponse) => {
     const { id } = req.query

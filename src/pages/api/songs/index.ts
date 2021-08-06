@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { albums } from './albums'
-import { soundtracks } from './soundtracks'
+import { albums } from './album1'
+import { soundtracks } from './song1'
 
 
 const show = (req: NextApiRequest, res: NextApiResponse) => {

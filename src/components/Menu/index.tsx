@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Box, Divider } from '@material-ui/core';
+import React, { ReactNode, useState } from 'react';
+import { Divider } from '@material-ui/core';
 
 import List from '@material-ui/core/List';
 
@@ -10,15 +10,17 @@ import useStyles from './styles'
 import InicioSvg from '../../assets/menu/inicio.svg'
 import BuscarSvg from '../../assets/menu/buscar.svg'
 import BibliotecaSvg from '../../assets/menu/biblioteca.svg'
-import AppBar from '@material-ui/core/AppBar';
+
+
 
 interface Props {
     window?: () => Window;
     children?: ReactNode;
+    Player?: React.FC;
 
 }
 
-const Menu: React.FC<Props> = ({ window, children }) => {
+const Menu: React.FC<Props> = ({ window, children, Player }) => {
     const classes = useStyles();
 
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -55,7 +57,9 @@ const Menu: React.FC<Props> = ({ window, children }) => {
             <main className={classes.content}>
                 {children}
             </main>
-
+            {
+                Player && <Player />
+            }
         </div>
 
     )

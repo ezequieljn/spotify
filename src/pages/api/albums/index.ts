@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { albums } from './albums'
+import { albums } from './album1'
 
 
 const show = (req: NextApiRequest, res: NextApiResponse) => {

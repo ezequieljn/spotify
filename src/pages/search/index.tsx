@@ -18,13 +18,14 @@ import Link from 'next/link'
 import { artistAlbumSongSearchApi } from '../../store/modules/global/action'
 
 import { ButtonLeftRight } from '../../components/ButtonLeftRight'
+import BoxBottomMenu from '../../components/BoxBottomMenu';
 
 interface playlistProps {
     id: string;
     album_id: string;
     name: string;
     artist: string;
-    photoAlbum: string;
+    image: string;
     minutes: string;
 }
 
@@ -47,37 +48,35 @@ function SearchPage({ artists, songs, albums }) {
     }, [searchAlbum]);
 
     const { album, artist, song } = useSelector((state: StoreState) => state);
-
+    console.log("song: ", song)
 
 
     return (
         <Menu >
-            <Grid container className={classes.container} spacing={1}>
-                <Grid item xs={false} sm={false} md={2} className={classes.gridContainerButtonLeftRight}>
-                    <Box className={classes.containerButtonLeftRight}>
-                        <ButtonLeftRight left />
-                        <ButtonLeftRight right />
-                    </Box>
+            <Box p={2}>
+                <Grid container className={classes.container} spacing={1}>
+                    <Grid item xs={4} sm={3} md={2} lg={1} xl={1} className={classes.gridContainerButtonLeftRight}>
+                        <Box className={classes.containerButtonLeftRight}>
+                            <ButtonLeftRight left disabled />
+                            <ButtonLeftRight right disabled />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={8} sm={9} md={6} lg={5} xl={4}>
+                        <Box component="form" className={classes.root}>
+                            <IconButton className={classes.iconButton} aria-label="menu">
+                                <SearchIcon className={classes.iconSearch} />
+                            </IconButton>
+                            <InputBase
+                                className={classes.input}
+                                placeholder="Artistas, músicas ou podcasts"
+                                inputProps={{ 'aria-label': 'search artist' }}
+                                onChange={(e) => setSearchAlbum(e.target.value)}
+                                value={searchAlbum}
+                            />
+                        </Box>
+                    </Grid >
                 </Grid>
-                <Grid item md={6}>
-                    <Box component="form" className={classes.root}>
-                        <IconButton className={classes.iconButton} aria-label="menu">
-                            <SearchIcon className={classes.iconSearch} />
-                        </IconButton>
-                        <InputBase
-                            className={classes.input}
-                            placeholder="Artistas, músicas ou podcasts"
-                            inputProps={{ 'aria-label': 'search artist' }}
-                            onChange={(e) => setSearchAlbum(e.target.value)}
-                            value={searchAlbum}
-                        />
-                    </Box>
-                </Grid >
-                <Grid item md={4}>
-                    <p>oii i</p>
-                </Grid>
-            </Grid>
-
+            </Box>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     {
@@ -95,7 +94,7 @@ function SearchPage({ artists, songs, albums }) {
                         song.data.map(item => <Playlist
                             key={item.id}
                             name={item.name}
-                            photoAlbum={item.photoAlbum}
+                            photoAlbum={item.image}
                             minutes={item.minutes}
                             artist={item.artist}
                         />)
@@ -136,6 +135,7 @@ function SearchPage({ artists, songs, albums }) {
                     </Grid>
                 </Grid>
             </Grid>
+            <BoxBottomMenu />
         </Menu>
     )
 }

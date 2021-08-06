@@ -10,7 +10,7 @@ export default function Home() {
     }
 
     return (
-        <Menu AppBar={App}>
+        <Menu>
             <div>
                 <p>spotify</p>
             </div>

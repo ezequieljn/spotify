@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { Box, Divider, Grid, Typography } from '@material-ui/core';
 import Head from 'next/head';
-import React from 'react';
 import { Menu } from '../../components/Menu';
 import Image from 'next/image'
 import useStyles from './styles';
@@ -12,13 +12,19 @@ import SongHeader from '../../components/ListSong/Header';
 import SongBody from '../../components/ListSong/Body';
 import { GetServerSideProps } from 'next';
 import { api } from '../../services';
+import BoxBottomMenu from '../../components/BoxBottomMenu';
+import { format } from 'date-fns';
 
+import Player from '../../components/Player'
 
 interface songProps {
     id: string;
     album_id: string;
     name: string;
-    minutes: string;
+    minutes: number;
+    name_album: string;
+    artist: string;
+    created_at: string;
 }
 
 interface albumProps {
@@ -27,15 +33,19 @@ interface albumProps {
 
 const Album: React.FC<albumProps> = ({ album }) => {
     const classes = useStyles()
+    const [playerState, setPlayerState] = useState(0)
+    const [musicCurrent, setMusicCurrent] = useState({ nameMusic: '', nameArtist: '' })
+
+    function PlayerEdit() {
+        return <Player album={album} setPlayerState={setPlayerState} playerState={playerState} musicCurrent={musicCurrent} setMusicCurrent={setMusicCurrent} />
+    }
 
     return (
         <>
             <Head>
-                <title>Spotify | 123</title>
+                <title>{`Spotify | ${album[0].name_album}`}</title>
             </Head>
-            <Menu>
-
-
+            <Menu Player={PlayerEdit} >
                 <Box className={classes.descriptionContainer}>
                     <Box className={classes.descriptionImageContainer}>
                         <Image
@@ -50,7 +60,7 @@ const Album: React.FC<albumProps> = ({ album }) => {
                             <Box className={classes.descriptionAlbum}>
                                 <p>Álbum</p>
                             </Box>
-                            <Typography variant="h1">Thriller</Typography>
+                            <Typography variant="h1">{album[0].name_album}</Typography>
                             <Box className={classes.descriptionArtistImageContainer}>
                                 <Image
                                     className={classes.descriptionArtistImageMain}
@@ -59,7 +69,7 @@ const Album: React.FC<albumProps> = ({ album }) => {
                                     height="30"
                                 />
                                 <Box className={classes.description}>
-                                    <p>Michael Jackson • 1982 • 9 música, 42min21s</p>
+                                    <p>{`${album[0].artist} • ${format(new Date(album[0].created_at), 'yyyy')} • ${album.length} música, ${album.map(item => item.minutes).reduce((s, i) => s + i)} min`}</p>
                                 </Box>
                             </Box>
                         </Box>
@@ -79,8 +89,13 @@ const Album: React.FC<albumProps> = ({ album }) => {
                     {
                         album && album.map((song, index) => (
                             <SongBody
-                                index={index + 1}
+                                key={song.id}
                                 id={song.id}
+                                setPlayerState={setPlayerState}
+                                setMusicCurrent={setMusicCurrent}
+                                index={index + 1}
+                                artist={song.artist}
+                                created_at={song.created_at}
                                 minutes={song.minutes}
                                 album_id={song.album_id}
                                 name={song.name}
@@ -88,7 +103,7 @@ const Album: React.FC<albumProps> = ({ album }) => {
                         ))
                     }
                 </Box>
-                <Box className={classes.boxSize} />
+                <BoxBottomMenu />
             </Menu>
 
         </>

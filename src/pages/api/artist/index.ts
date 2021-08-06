@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { artist as artistData } from "./artist";
+import { artist as artistData } from "./artist1";
 
 
 

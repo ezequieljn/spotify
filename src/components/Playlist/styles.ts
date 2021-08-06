@@ -6,6 +6,7 @@ export default makeStyles((theme: Theme) =>
             borderRadius: 3,
         },
         image: {
+            cursor: "no-drop",
             borderRadius: 3,
             transition: "background 0.7s",
             "&:hover": {

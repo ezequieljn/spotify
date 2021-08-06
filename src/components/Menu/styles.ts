@@ -10,11 +10,6 @@ export default makeStyles((theme: Theme) =>
             paddingLeft: theme.spacing(2),
             paddingRight: theme.spacing(2),
         },
-        appBarContainer: {
-            height: 75,
-            display: 'flex',
-            alignItems: 'center',
-        },
 
     }),
 );
