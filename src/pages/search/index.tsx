@@ -20,6 +20,15 @@ import { ButtonLeftRight } from '../../components/ButtonLeftRight'
 import BoxBottomMenu from '../../components/BoxBottomMenu';
 import { InfiniteScroll } from '../../components/InfiniteScroll';
 import { useTheme } from '../../hooks/theme';
+import { CardSession } from '../../components/CardSession';
+import sessions from './sessions.json';
+
+
+interface ItensProps {
+    id: string,
+    name: string,
+    color: string
+}
 
 function SearchPage({ artists, songs, albums, spotifyTheme }) {
     const [searchAlbum, setSearchAlbum] = useState('')
@@ -58,6 +67,7 @@ function SearchPage({ artists, songs, albums, spotifyTheme }) {
 
     return (
         <Menu >
+
             <Box p={2}>
                 <Grid container className={classes.container} spacing={1}>
                     <Grid item xs={4} sm={3} md={2} lg={1} xl={1} className={classes.gridContainerButtonLeftRight}>
@@ -82,79 +92,99 @@ function SearchPage({ artists, songs, albums, spotifyTheme }) {
                     </Grid >
                 </Grid>
             </Box>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    {
-                        artist.artistMain.map((item, index) => (
-                            <ArtistDescription
-                                key={item.id}
-                                name={item.artist}
-                                photo={item.image}
-                            />
-                        ))
-                    }
-                </Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    {
-                        song.data.map(item => <Playlist
-                            key={item.id}
-                            name={item.name}
-                            image={item.image}
-                            minutes={item.minutes}
-                            artist={item.artist}
-                        />)
-                    }
-
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Grid container spacing={2}>
-                        {
-
-                            !!artist.artistAll[0] && <Grid item xs={12} md={12} >
-                                <Typography className={classes.textColor}>Artistas</Typography>
+            {
+                searchAlbum ?
+                    <>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                                {
+                                    artist.artistMain.map((item, index) => (
+                                        <ArtistDescription
+                                            key={item.id}
+                                            name={item.artist}
+                                            photo={item.image}
+                                        />
+                                    ))
+                                }
                             </Grid>
-                        }
-                        {
-                            artist.artistAll.map(item => (
-                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id}>
-                                    <ArtistAll
+                            <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                                {
+                                    song.data.map(item => <Playlist
+                                        key={item.id}
+                                        name={item.name}
+                                        image={item.image}
+                                        minutes={item.minutes}
                                         artist={item.artist}
-                                        photo={item.image}
-                                    />
+                                    />)
+                                }
+
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                <Grid container spacing={2}>
+                                    {
+
+                                        !!artist.artistAll[0] && <Grid item xs={12} md={12} >
+                                            <Typography className={classes.textColor}>Artistas</Typography>
+                                        </Grid>
+                                    }
+                                    {
+                                        artist.artistAll.map(item => (
+                                            <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id}>
+                                                <ArtistAll
+                                                    artist={item.artist}
+                                                    photo={item.image}
+                                                />
+                                            </Grid>
+                                        ))
+                                    }
                                 </Grid>
-                            ))
-                        }
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                            {
-                                !!album.data[0] && <Grid item xs={12} md={12} >
-                                    <Typography className={classes.textColor}>Álbum</Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                        {
+                                            !!album.data[0] && <Grid item xs={12} md={12} >
+                                                <Typography className={classes.textColor}>Álbum</Typography>
+                                            </Grid>
+                                        }
+                                    </Grid>
+                                    {
+                                        album.data.map(item => (
+                                            <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id} >
+                                                <Album
+                                                    id={item.id}
+                                                    artist={item.artist}
+                                                    photo={item.image}
+                                                    album={item.name}
+                                                />
+                                            </Grid>
+                                        ))
+                                    }
                                 </Grid>
-                            }
+                            </Grid>
                         </Grid>
                         {
-                            album.data.map(item => (
-                                <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id} >
-                                    <Album
-                                        id={item.id}
-                                        artist={item.artist}
-                                        photo={item.image}
-                                        album={item.name}
-                                    />
-                                </Grid>
-                            ))
+                            !!searchAlbum && album.data[0] && !loading.api && (
+                                <InfiniteScroll fetchMore={() => handleScroll()} />
+                            )
                         }
-                    </Grid>
-                </Grid>
-            </Grid>
-            {
-                !!searchAlbum && album.data[0] && !loading.api && (
-                    <InfiniteScroll fetchMore={() => handleScroll()} />
-                )
+                    </> :
+
+                    <>
+                        <Typography variant="h5" className={classes.textColorSession} >Navegar por todas as seções</Typography>
+                        <Grid container spacing={2}>
+                            {
+                                sessions.map((prop: ItensProps, index: number) => (
+                                    <CardSession
+                                        key={index}
+                                        name={prop.name}
+                                        color={prop.color} />
+                                ))
+                            }
+                        </Grid>
+                    </>
             }
+
             <BoxBottomMenu />
         </Menu>
     )

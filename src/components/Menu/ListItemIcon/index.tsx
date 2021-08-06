@@ -10,12 +10,13 @@ import Link from 'next/link'
 interface ListitemiconType {
     text: string;
     icon?: any;
+    url: string;
 }
 
-function ListItemIcon({ text, icon: Icon }: ListitemiconType) {
+function ListItemIcon({ text, icon: Icon, url }: ListitemiconType) {
     const classes = useStyle()
     return (
-        <Link href={`/search`} passHref>
+        <Link href={`${url}`} passHref>
             <ListItem button key={text} className={classes.container}>
                 <Listitemicon>
                     {

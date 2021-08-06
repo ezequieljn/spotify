@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "name": "Podcasts",
+        "color": "#27856a"
+    },
+    {
+        "id": "2",
+        "name": "Feito para você",
+        "color": "#1e3264"
+    },
+    {
+        "id": "3",
+        "name": "Paradas",
+        "color": "#8d67ab"
+    },
+    {
+        "id": "4",
+        "name": "Novos lançamentos",
+        "color": "#e8115b"
+    },
+    {
+        "id": "5",
+        "name": "Descobrir",
+        "color": "#8d67ab"
+    },
+    {
+        "id": "6",
+        "name": "Concerts",
+        "color": "#1e3264"
+    }
+]

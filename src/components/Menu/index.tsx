@@ -45,9 +45,9 @@ const Menu: React.FC<Props> = ({ window, children, Player }) => {
                 <IoIosMore size={30} color={themeMaterial.palette.text.primary} />
             </Box>
             <List>
-                <ListItemIcon text="Início" icon={theme === "yellow" ? InicioBlackSvg : InicioSvg} />
-                <ListItemIcon text="Buscar" icon={theme === "yellow" ? BuscarBlackSvg : BuscarSvg} />
-                <ListItemIcon text="Sua Biblioteca" icon={theme === "yellow" ? BibliotecaBlackSvg : BibliotecaSvg} />
+                <ListItemIcon url="/" text="Início" icon={theme === "yellow" ? InicioBlackSvg : InicioSvg} />
+                <ListItemIcon url="/search" text="Buscar" icon={theme === "yellow" ? BuscarBlackSvg : BuscarSvg} />
+                <ListItemIcon url="/search" text="Sua Biblioteca" icon={theme === "yellow" ? BibliotecaBlackSvg : BibliotecaSvg} />
             </List>
             <Divider />
             <List>
