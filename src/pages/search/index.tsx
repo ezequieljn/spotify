@@ -18,18 +18,13 @@ import Link from 'next/link'
 import { artistAlbumSongSearchApi } from '../../store/modules/global/action'
 import { ButtonLeftRight } from '../../components/ButtonLeftRight'
 import BoxBottomMenu from '../../components/BoxBottomMenu';
+import { InfiniteScroll } from '../../components/InfiniteScroll';
 
-interface playlistProps {
-    id: string;
-    album_id: string;
-    name: string;
-    artist: string;
-    image: string;
-    minutes: string;
-}
 
 function SearchPage({ artists, songs, albums }) {
     const [searchAlbum, setSearchAlbum] = useState('')
+    const [page, setPage] = useState(1)
+    //const [loading, setLoading] = useState(false)
 
     const classes = useStyles()
     const dispatch = useDispatch()
@@ -42,13 +37,18 @@ function SearchPage({ artists, songs, albums }) {
 
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => dispatch(artistAlbumSongSearchApi(searchAlbum)), 500);
+        const timeoutId = setTimeout(() => dispatch(artistAlbumSongSearchApi(searchAlbum, 1)), 500);
         return () => clearTimeout(timeoutId);
     }, [searchAlbum]);
 
-    const { album, artist, song } = useSelector((state: StoreState) => state);
-    console.log("song: ", song)
 
+    function handleScroll() {
+        console.log("123333")
+        dispatch(artistAlbumSongSearchApi(searchAlbum, page + 1))
+        setPage(prop => prop + 1)
+    }
+    const { album, artist, song, loading } = useSelector((state: StoreState) => state);
+    console.log("ççç", !loading.api)
 
     return (
         <Menu >
@@ -103,6 +103,12 @@ function SearchPage({ artists, songs, albums }) {
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Grid container spacing={2}>
                         {
+
+                            !!artist.artistAll[0] && <Grid item xs={12} md={12} >
+                                <Typography className={classes.textColor}>Artistas</Typography>
+                            </Grid>
+                        }
+                        {
                             artist.artistAll.map(item => (
                                 <Grid item xs={6} sm={4} md={3} lg={2} xl={1} key={item.id}>
                                     <ArtistAll
@@ -117,7 +123,11 @@ function SearchPage({ artists, songs, albums }) {
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                            <Typography>{Album}</Typography>
+                            {
+                                !!album.data[0] && <Grid item xs={12} md={12} >
+                                    <Typography className={classes.textColor}>Álbum</Typography>
+                                </Grid>
+                            }
                         </Grid>
                         {
                             album.data.map(item => (
@@ -134,6 +144,11 @@ function SearchPage({ artists, songs, albums }) {
                     </Grid>
                 </Grid>
             </Grid>
+            {
+                !!searchAlbum && album.data[0] && !loading.api && (
+                    <InfiniteScroll fetchMore={() => handleScroll()} />
+                )
+            }
             <BoxBottomMenu />
         </Menu>
     )

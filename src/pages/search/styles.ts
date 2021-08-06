@@ -41,6 +41,9 @@ export default makeStyles((theme: Theme) =>
             flexDirection: 'row',
             justifyContent: 'space-around',
             backgroundSize: 'cover',
+        },
+        textColor: {
+            color: theme.palette.text.primary,
         }
     }),
 );

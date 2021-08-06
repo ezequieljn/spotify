@@ -6,6 +6,7 @@ import { songProps, AlbumProps, artistAllProps, artistMainProps } from './types'
 import * as actionsAlbum from '../album/actions'
 import * as actionsArtist from '../artist/actions'
 import * as actionsSong from '../song/actions'
+import * as actionsLoading from '../loadingApi/actions'
 
 
 
@@ -24,17 +25,21 @@ interface albumsResponseProps {
 
 export function* artist_album_songRequest({ payload }: ActionType<typeof actions.artistAlbumSongSearchApi>) {
     try {
-        const { artist } = payload
+        const { artist, page } = payload
 
         if (artist) {
+            yield put(actionsLoading.loadingApiTrue())
+
             const { data: artists }: artistsResponseProps = yield call(api.post, 'artist', { artist });
             const { data: songs }: songsResponseProps = yield call(api.post, 'songs', { artist });
-            const { data: albums }: albumsResponseProps = yield call(api.post, 'albums', { artist });
+            const { data: albums }: albumsResponseProps = yield call(api.post, 'albums', { artist, page });
 
             yield put(actionsArtist.artistSearchSave(artists))
             yield put(actionsAlbum.albumSearchSave(albums))
             yield put(actionsSong.songSearchSave(songs))
+            yield put(actionsLoading.loadingApiFalse())
         } else {
+            yield put(actionsLoading.loadingApiFalse())
             return
         }
 
