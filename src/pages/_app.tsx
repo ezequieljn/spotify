@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppProps } from 'next/app'
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '../hooks/theme'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { theme } from '../global/theme';
+
 import '../styles/globals.css'
 import { PersistGate } from 'redux-persist/integration/react';
 import { useStore } from 'react-redux';
-
+import ThemeProviderHook from './ThemeProvider'
 import { wrapper } from '../store';
+
 
 function MyApp({ Component, pageProps }: AppProps) {
     const store: any = useStore();
-
+    const [theme, setTheme] = useState<null | string>(null)
 
     useEffect(() => {
         const jssStyles = document.querySelector('#jss-server-side');
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
     }, []);
 
+
     return (
         <React.Fragment>
             <Head>
@@ -28,9 +30,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             </Head>
             <PersistGate persistor={store._persist}>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
-                    <Component {...pageProps} />
+                <ThemeProvider>
+                    <ThemeProviderHook>
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </ThemeProviderHook>
                 </ThemeProvider>
             </PersistGate>
         </React.Fragment>

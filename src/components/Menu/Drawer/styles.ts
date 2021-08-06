@@ -12,7 +12,8 @@ export default makeStyles((theme: Theme) =>
         },
         drawerPaper: {
             width: drawerWidth,
-            borderRight: 'none'
+            borderRight: 'none',
+            backgroundColor: theme.palette.background.paper,
         },
     }),
 );

@@ -8,7 +8,7 @@ export default makeStyles((theme: Theme) =>
             flexDirection: 'row',
             transition: "background 0.3s",
             "&:hover": {
-                backgroundColor: theme.palette.background.paper,
+                backgroundColor: theme.palette.primary.dark,
             },
             borderRadius: 5
         },

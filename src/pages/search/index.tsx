@@ -16,7 +16,6 @@ import { artistSearchSave } from '../../store/modules/artist/actions'
 import { songSearchSave } from '../../store/modules/song/actions'
 import Link from 'next/link'
 import { artistAlbumSongSearchApi } from '../../store/modules/global/action'
-
 import { ButtonLeftRight } from '../../components/ButtonLeftRight'
 import BoxBottomMenu from '../../components/BoxBottomMenu';
 
@@ -140,8 +139,8 @@ function SearchPage({ artists, songs, albums }) {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-    const { artist } = query
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { artist } = context.query
 
     if (artist) {
         const { data: artists } = await api.post("artist", { artist })
@@ -159,7 +158,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
                 artistAll: [],
                 artistMain: []
             },
-            songs: [], albums: []
+            songs: [], albums: [],
+
         }
     }
 }

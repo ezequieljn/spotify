@@ -1,20 +1,20 @@
 import { createTheme } from '@material-ui/core'
 
-export const theme = createTheme({
+export const themePurple = createTheme({
     palette: {
         common: {
             black: "#000",
             white: "#fff",
         },
         primary: {
-            main: "#181818",
+            main: "#b37feb",
         },
         secondary: {
-            main: "#282828",
+            main: "#9254de",
         },
         background: {
-            paper: "#000",
-            default: "#121212"
+            paper: "#531dab",
+            default: "#722ed1"
         },
         text: {
             primary: "#fff",

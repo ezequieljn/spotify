@@ -3,6 +3,7 @@ module.exports = {
     images: {
         domains: [
             'i.scdn.co',
+            'i.ibb.co',
             'colourlex.com',
             'cepoa.com.br',
             'mycond.com.br',

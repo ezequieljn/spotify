@@ -11,7 +11,7 @@ export default makeStyles((theme: Theme) =>
             position: 'fixed',
             zIndex: theme.zIndex.drawer + 1,
             width: '100%',
-            background: theme.palette.background.default,
+            background: theme.palette.secondary.dark,
             height: 80,
             left: 0,
             bottom: 0,

@@ -13,12 +13,12 @@ export const artist = [
     {
         id: "0d05f4c4-8930-51a4-89ed-0f4f4419c988",
         artist: "Head Grimes",
-        image: "https://colourlex.com/wp-content/uploads/2021/02/Chrome-red-painted-swatch-N-300x300.jpg.webp"
+        image: "https://i.ibb.co/D1NK4LB/Head-Grimes.png"
     },
     {
         id: "b842af1d-a83f-5eba-84ce-782a8450bb8d",
         artist: "Lindsey Larsen",
-        image: "https://mycond.com.br/wp-content/uploads/2019/01/IMG-branco-300x300.jpg"
+        image: "https://i.ibb.co/nRR0fGZ/Lindsey-Larsen.png"
     },
     {
         id: "2678c21c-633a-5c70-b811-61441329ea17",
@@ -33,7 +33,7 @@ export const artist = [
     {
         id: "55ed4fea-2d51-5084-862d-8bd68fac4750",
         artist: "Marianne Day",
-        image: "https://cepoa.com.br/wp-content/uploads/2018/11/fundo-azul.jpg"
+        image: "https://i.ibb.co/sywvgzP/Marianne-Day.png"
     },
     {
         id: "e98431f3-b2e9-530e-b315-594592fc5b75",

@@ -4,7 +4,7 @@ export default makeStyles((theme: Theme) =>
     createStyles({
         containerPaper: {
             padding: 20,
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor: theme.palette.primary.dark,
         },
         imagemArtist: {
             margin: 20

@@ -1,6 +1,6 @@
 import { createTheme } from '@material-ui/core'
 
-export const theme = createTheme({
+export const themeYellow = createTheme({
     palette: {
         common: {
             black: "#000",

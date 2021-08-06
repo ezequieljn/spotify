@@ -15,7 +15,7 @@ import InicioBlackSvg from '../../assets/menu/inicio_black.svg'
 import BuscarBlackSvg from '../../assets/menu/buscar_black.svg'
 import BibliotecaBlackSvg from '../../assets/menu/biblioteca_black.svg'
 
-
+import { useTheme } from '../../hooks/theme'
 
 interface Props {
     window?: () => Window;
@@ -33,6 +33,9 @@ const Menu: React.FC<Props> = ({ window, children, Player }) => {
         setMobileOpen(!mobileOpen);
     };
 
+    const { setTheme, theme } = useTheme()
+
+    console.log(theme)
     const drawer = (
         <div>
 
@@ -43,7 +46,10 @@ const Menu: React.FC<Props> = ({ window, children, Player }) => {
             </List>
             <Divider />
             <List>
-
+                <button onClick={() => setTheme('dark')}>dark</button>
+                <button onClick={() => setTheme('yellow')}>yellow</button>
+                <button onClick={() => setTheme('purple')}>purple</button>
+                <p>{theme}</p>
             </List>
         </div>
     );
@@ -59,7 +65,9 @@ const Menu: React.FC<Props> = ({ window, children, Player }) => {
                 drawer={drawer}
                 handleDrawerToggle={handleDrawerToggle} />
             <main className={classes.content}>
-                {children}
+                <div className={classes.contentDiv}>
+                    {children}
+                </div>
             </main>
             {
                 Player && <Player />
