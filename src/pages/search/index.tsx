@@ -57,9 +57,9 @@ function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
             if (searchAlbum) {
                 return dispatch(artistAlbumSongSearchApi(searchAlbum, 1))
             } else {
-                dispatch(artistAlbumSongSearchApi(artistQuery || "", 1))
+                return dispatch(artistAlbumSongSearchApi(artistQuery || "", 1))
             }
-        }, 500);
+        }, 500)
         return () => clearTimeout(timeoutId);
     }, [searchAlbum]);
 
@@ -99,7 +99,7 @@ function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
                 </Grid>
             </Box>
             {
-                artistQuery ?
+                !!album.data[0] ?
                     <>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
