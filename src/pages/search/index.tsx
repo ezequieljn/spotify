@@ -33,7 +33,6 @@ interface ItensProps {
 function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
     const [searchAlbum, setSearchAlbum] = useState('')
     const [page, setPage] = useState(1)
-    console.log("artistQuery: ", artistQuery)
     const classes = useStyles()
     const dispatch = useDispatch()
     const { changeTheme } = useTheme()
@@ -51,7 +50,6 @@ function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
         dispatch(songSearchSave(songs))
     }, [])
 
-    console.log(">> ", api.defaults.baseURL)
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             if (searchAlbum) {
@@ -65,7 +63,6 @@ function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
 
 
     function handleScroll() {
-        console.log("scroll")
         dispatch(artistAlbumSongSearchApi(searchAlbum, page + 1))
         setPage(prop => prop + 1)
     }

@@ -10,10 +10,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     file.append({ ip: "Computer Science", search: "KULeuven" });
 
     if (req.method == "POST") {
-        console.log(file)
         try {
         } catch (err) {
-            console.log(err);
         }
 
         return res.status(200).json({ message: "ok." })

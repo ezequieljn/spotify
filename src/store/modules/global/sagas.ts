@@ -26,7 +26,6 @@ interface albumsResponseProps {
 export function* artist_album_songRequest({ payload }: ActionType<typeof actions.artistAlbumSongSearchApi>) {
     try {
         const { artist, page } = payload
-        console.log("artist: ", artist)
         if (artist) {
             yield put(actionsLoading.loadingApiTrue())
 
@@ -46,7 +45,6 @@ export function* artist_album_songRequest({ payload }: ActionType<typeof actions
         }
 
     } catch (err) {
-        console.log("React", err)
     }
 }
 

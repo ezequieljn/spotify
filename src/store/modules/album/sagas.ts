@@ -23,7 +23,6 @@ export function* albumRequest({ payload }: ActionType<typeof actions.albumSearch
 
 
     } catch (err) {
-        console.log("saga song ", err)
     }
 }
 

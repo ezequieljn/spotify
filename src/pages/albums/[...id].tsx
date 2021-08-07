@@ -38,10 +38,7 @@ interface albumProps {
 const Album: React.FC<albumProps> = ({ album, spotifyTheme, error }) => {
     const classes = useStyles()
     const [musicCurrent, setMusicCurrent] = useState({ nameMusic: '', nameArtist: '', time: '' })
-    console.log("album: ", album)
-    console.log(">> api album ", api.defaults.baseURL)
     const { changeTheme } = useTheme()
-    console.log("error> :", error)
     useEffect(() => {
         if (spotifyTheme) {
             changeTheme(spotifyTheme)
@@ -158,7 +155,6 @@ export const getServerSideProps: GetServerSideProps = async (props) => {
     let error
     try {
         const { data: response } = await api.get(`/albums/${id[0]}`)
-        console.log("response: ", response)
         return {
             props: {
                 album: response,
@@ -168,7 +164,6 @@ export const getServerSideProps: GetServerSideProps = async (props) => {
 
     } catch (err) {
         error = err
-        console.log("err: ", err)
     }
 
     return {

@@ -13,9 +13,6 @@ interface PlaylistProps {
 
 function Playlist({ name, image, minutes, artist }: PlaylistProps) {
 
-    console.log("image: ", image)
-
-
     const classes = useStyles()
     return (
         <Box display="flex" flexDirection="row" className={classes.image}>
