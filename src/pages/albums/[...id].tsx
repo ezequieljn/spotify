@@ -145,12 +145,11 @@ export const getServerSideProps: GetServerSideProps = async (props) => {
     const cookies = parseCookies(props)
     let error
     try {
-        const { data: response } = await api.get(`albums/${id[0]}`)
+        const { data: response } = await api.get(`/albums/${id[0]}`)
         console.log("response: ", response)
         return {
             props: {
                 album: response,
-                error,
                 spotifyTheme: cookies.spotifyTheme || 'dark'
             }
         }
