@@ -30,10 +30,10 @@ interface ItensProps {
     color: string
 }
 
-function SearchPage({ artists, songs, albums, spotifyTheme }) {
+function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
     const [searchAlbum, setSearchAlbum] = useState('')
     const [page, setPage] = useState(1)
-
+    console.log("artistQuery: ", artistQuery)
     const classes = useStyles()
     const dispatch = useDispatch()
     const { changeTheme } = useTheme()
@@ -53,7 +53,13 @@ function SearchPage({ artists, songs, albums, spotifyTheme }) {
 
     console.log(">> ", api.defaults.baseURL)
     useEffect(() => {
-        const timeoutId = setTimeout(() => dispatch(artistAlbumSongSearchApi(searchAlbum, 1)), 500);
+        const timeoutId = setTimeout(() => {
+            if (searchAlbum) {
+                return dispatch(artistAlbumSongSearchApi(searchAlbum, 1))
+            } else {
+                dispatch(artistAlbumSongSearchApi(artistQuery || "", 1))
+            }
+        }, 500);
         return () => clearTimeout(timeoutId);
     }, [searchAlbum]);
 
@@ -93,7 +99,7 @@ function SearchPage({ artists, songs, albums, spotifyTheme }) {
                 </Grid>
             </Box>
             {
-                searchAlbum ?
+                artistQuery ?
                     <>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -194,13 +200,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { artist } = context.query
     const cookies = parseCookies(context)
     if (artist) {
-        const { data: artists } = await api.post("artist", { artist })
-        const { data: songs } = await api.post("songs", { artist })
-        const { data: albums } = await api.post("albums", { artist })
+        const { data: artists } = await api.post("/artist", { artist })
+        const { data: songs } = await api.post("/songs", { artist })
+        const { data: albums } = await api.post("/albums", { artist })
 
         return {
-            props: { artists, songs, albums },
-            spotifyTheme: cookies.spotifyTheme || 'dark'
+            props: {
+                artistQuery: artist,
+                artists,
+                songs,
+                albums,
+                spotifyTheme: cookies.spotifyTheme || 'dark'
+            },
         }
     }
 
@@ -210,6 +221,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 artistAll: [],
                 artistMain: []
             },
+            artistQuery: artist || null,
             songs: [],
             albums: [],
             spotifyTheme: cookies.spotifyTheme || 'dark'

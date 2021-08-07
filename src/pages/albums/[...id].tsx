@@ -138,8 +138,16 @@ const Album: React.FC<albumProps> = ({ album, spotifyTheme, error }) => {
 }
 
 export default Album;
-
-
+/*
+export const getStaticProps: GetStaticProps = async () => {
+    return {
+      props: {
+        
+      },
+      revalidate: 60, // 1 minute
+    }
+  }
+*/
 export const getServerSideProps: GetServerSideProps = async (props) => {
     const { id } = props.query
     const cookies = parseCookies(props)
