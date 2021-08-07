@@ -34,7 +34,7 @@ export default function Home({ spotifyTheme }) {
                 <title>Spotify | Início</title>
             </Head>
             <Menu>
-                <Typography variant="h5" className={classes.textColor} >Navegar por todas as seções</Typography>
+                <Typography variant="h5" className={classes.textSession} >Navegar por todas as seções</Typography>
                 <Grid container spacing={2}>
                     {
                         sessions.map((prop: ItensProps, index: number) => (

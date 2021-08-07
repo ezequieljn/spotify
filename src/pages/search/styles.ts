@@ -46,7 +46,9 @@ export default makeStyles((theme: Theme) =>
             color: theme.palette.text.primary,
         },
         textColorSession: {
-            marginTop: 15
-        }
+            marginTop: 15,
+            color: theme.palette.text.primary,
+        },
+
     }),
 );

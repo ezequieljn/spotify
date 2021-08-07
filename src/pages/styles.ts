@@ -5,6 +5,9 @@ export default makeStyles((theme: Theme) =>
         textColor: {
             marginTop: 15,
             color: theme.palette.text.primary,
+        },
+        textSession: {
+            color: theme.palette.text.primary,
         }
     }),
 );

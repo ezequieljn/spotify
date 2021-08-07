@@ -47,7 +47,7 @@ function Player({ musicCurrent, album, setMusicCurrent, }: PlayerProps) {
     };
 
     useEffect(() => {
-        if (musicCurrent.nameMusic === '') {
+        if (musicCurrent.nameMusic === '' && album[0]) {
             setMusicCurrent({
                 nameMusic: album[0].name,
                 nameArtist: album[0].artist,

@@ -7,9 +7,11 @@ export default makeStyles((theme: Theme) =>
             marginTop: 25,
             aspectRatio: "18/17",
             borderRadius: 10,
+
         },
         text: {
-            color: theme.palette.text.primary,
-        }
+            color: theme.palette.common.white,
+        },
+
     }),
 );
