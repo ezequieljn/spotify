@@ -10,7 +10,7 @@ import { IoEllipsisHorizontalSharp } from 'react-icons/io5'
 
 import SongHeader from '../../components/ListSong/Header';
 import SongBody from '../../components/ListSong/Body';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import { api } from '../../services';
 import BoxBottomMenu from '../../components/BoxBottomMenu';
 import { format } from 'date-fns';
@@ -65,41 +65,45 @@ const Album: React.FC<albumProps> = ({ album, spotifyTheme, error }) => {
             <Menu Player={PlayerEdit} >
                 {
                     album[0] && <>
-                        <Box className={classes.descriptionContainer}>
-                            <Box className={classes.descriptionImageContainer}>
-                                {
-                                    !!album[0] &&
-                                    <Image
-                                        className={classes.descriptionImageMain}
-                                        src={album[0].image}
-                                        width="200"
-                                        height="200"
-                                    />
-                                }
-                            </Box>
-                            <Box className={classes.descriptionInfo}>
-                                <Box>
-                                    <Box className={classes.descriptionAlbum}>
-                                        <p className={classes.textColor}>Álbum</p>
-                                    </Box>
-                                    <Typography variant="h1" className={classes.textColor}>{!!album[0] && album[0].name_album}</Typography>
-                                    <Box className={classes.descriptionArtistImageContainer}>
-                                        {
-                                            !!album[0] &&
-                                            <Image
-                                                className={classes.descriptionArtistImageMain}
-                                                src={album[0].image}
-                                                width="30"
-                                                height="30"
-                                            />
-                                        }
-                                        <Box className={classes.description}>
-                                            <p className={classes.textColor}>{!!album[0] && `${album[0].artist} • ${format(new Date(album[0].created_at), 'yyyy')} • ${album.length} música, ${album.map(item => item.minutes).reduce((s, i) => s + i)} min`}</p>
+                        <Grid container>
+                            <Grid item xs={12} sm={12} md={4} lg={2} xl={1}>
+                                <Box className={classes.descriptionImageContainer}>
+                                    {
+                                        !!album[0] &&
+                                        <Image
+                                            className={classes.descriptionImageMain}
+                                            src={album[0].image}
+                                            width="200"
+                                            height="200"
+                                        />
+                                    }
+                                </Box>
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={8} lg={6} xl={4}>
+                                <Box className={classes.descriptionInfo}>
+                                    <Box>
+                                        <Box className={classes.descriptionAlbum}>
+                                            <p className={classes.textColor}>Álbum</p>
+                                        </Box>
+                                        <Typography variant="h1" className={classes.textColor}>{!!album[0] && album[0].name_album}</Typography>
+                                        <Box className={classes.descriptionArtistImageContainer}>
+                                            {
+                                                !!album[0] &&
+                                                <Image
+                                                    className={classes.descriptionArtistImageMain}
+                                                    src={album[0].image}
+                                                    width="30"
+                                                    height="30"
+                                                />
+                                            }
+                                            <Box className={classes.description}>
+                                                <p className={classes.textColor}>{!!album[0] && `${album[0].artist} • ${format(new Date(album[0].created_at), 'yyyy')} • ${album.length} música, ${album.map(item => item.minutes).reduce((s, i) => s + i)} min`}</p>
+                                            </Box>
                                         </Box>
                                     </Box>
                                 </Box>
-                            </Box>
-                        </Box>
+                            </Grid>
+                        </Grid>
                         <Box className={classes.playContainer}>
                             <Image
                                 src={PlayerImg}

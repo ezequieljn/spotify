@@ -8,7 +8,7 @@ export default makeStyles((theme: Theme) =>
         },
         descriptionImageContainer: {
             padding: 10,
-            background: '#fff',
+
         },
 
         descriptionImageMain: {
