@@ -32,10 +32,9 @@ interface songProps {
 interface albumProps {
     album: songProps[],
     spotifyTheme: 'dark' | 'yellow' | 'purple',
-    error: any
 }
 
-const Album: React.FC<albumProps> = ({ album, spotifyTheme, error }) => {
+const Album: React.FC<albumProps> = ({ album, spotifyTheme }) => {
     const classes = useStyles()
     const [musicCurrent, setMusicCurrent] = useState({ nameMusic: '', nameArtist: '', time: '' })
     const { changeTheme } = useTheme()
@@ -47,7 +46,6 @@ const Album: React.FC<albumProps> = ({ album, spotifyTheme, error }) => {
 
     function PlayerEdit() {
         if (album[0]) {
-
             return <Player album={album} musicCurrent={musicCurrent} setMusicCurrent={setMusicCurrent} />
         } else {
             return <></>
@@ -152,7 +150,6 @@ export const getStaticProps: GetStaticProps = async () => {
 export const getServerSideProps: GetServerSideProps = async (props) => {
     const { id } = props.query
     const cookies = parseCookies(props)
-    let error
     try {
         const { data: response } = await api.get(`/albums/${id[0]}`)
         return {
@@ -163,13 +160,11 @@ export const getServerSideProps: GetServerSideProps = async (props) => {
         }
 
     } catch (err) {
-        error = err
     }
-
     return {
         props: {
             album: [],
-            error,
+
             spotifyTheme: cookies.spotifyTheme || 'dark'
         }
     }

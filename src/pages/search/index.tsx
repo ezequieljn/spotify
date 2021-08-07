@@ -53,13 +53,18 @@ function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             if (searchAlbum) {
+                setPage(1)
                 return dispatch(artistAlbumSongSearchApi(searchAlbum, 1))
             } else {
+                setPage(1)
                 return dispatch(artistAlbumSongSearchApi(artistQuery || "", 1))
             }
         }, 500)
         return () => clearTimeout(timeoutId);
     }, [searchAlbum]);
+
+
+
 
 
     function handleScroll() {
@@ -167,7 +172,7 @@ function SearchPage({ artists, songs, albums, artistQuery, spotifyTheme }) {
                             </Grid>
                         </Grid>
                         {
-                            !!searchAlbum && album.data[0] && !loading.api && (
+                            album.data[0] && !loading.api && (
                                 <InfiniteScroll fetchMore={() => handleScroll()} />
                             )
                         }
