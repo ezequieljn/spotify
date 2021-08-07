@@ -32,14 +32,16 @@ interface songProps {
 interface albumProps {
     album: songProps[],
     spotifyTheme: 'dark' | 'yellow' | 'purple',
+    error: any
 }
 
-const Album: React.FC<albumProps> = ({ album, spotifyTheme }) => {
+const Album: React.FC<albumProps> = ({ album, spotifyTheme, error }) => {
     const classes = useStyles()
     const [musicCurrent, setMusicCurrent] = useState({ nameMusic: '', nameArtist: '', time: '' })
     console.log("album: ", album)
+    console.log(">> api album ", api.defaults.baseURL)
     const { changeTheme } = useTheme()
-
+    console.log("error> :", error)
     useEffect(() => {
         if (spotifyTheme) {
             changeTheme(spotifyTheme)
@@ -141,24 +143,27 @@ export default Album;
 export const getServerSideProps: GetServerSideProps = async (props) => {
     const { id } = props.query
     const cookies = parseCookies(props)
-
+    let error
     try {
         const { data: response } = await api.get(`albums/${id[0]}`)
         console.log("response: ", response)
         return {
             props: {
                 album: response,
+                error,
                 spotifyTheme: cookies.spotifyTheme || 'dark'
             }
         }
 
-    } catch {
-
+    } catch (err) {
+        error = err
+        console.log("err: ", err)
     }
 
     return {
         props: {
             album: [],
+            error,
             spotifyTheme: cookies.spotifyTheme || 'dark'
         }
     }
